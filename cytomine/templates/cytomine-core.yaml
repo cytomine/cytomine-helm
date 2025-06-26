@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: cytomine-core
+  name: cytomine-core
+spec:
+  containers:
+  - name: cytomine-core
+    image: cytomine/core:latest
+    ports:
+      - containerPort: 8080
+    env:
+    - name: POSTGIS_PASS
+      value: password
+    - name: MONGO_DB_NAME
+      value: cytomine
+    - name: MONGO_HOST
+      value: mongo
+    - name: MONGO_PASS
+      value: secret
+    - name: MONGO_PORT
+      value: "27017"
+    - name: MONGO_USER
+      value: mongoadmin
+    - name: POSTGIS_DB_NAME
+      value: docker
+    - name: POSTGIS_HOST
+      value: postgis
+    - name: POSTGIS_PASS
+      value: docker
+    - name: POSTGIS_PORT
+      value: "5432"
+    - name: POSTGIS_USER
+      value: docker
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cytomine-core-service
+spec:
+  selector:
+    name: cytomine-core
+  ports:
+  - name: cytomine-core-port
+    protocol: TCP
+    port: 8080
+

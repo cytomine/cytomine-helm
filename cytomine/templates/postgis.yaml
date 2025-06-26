@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: postgis
+  name: postgis
+spec:
+  containers:
+  - name: postgis
+    image: postgis/postgis:latest
+    ports:
+    - containerPort: 5432
+    env:
+    - name: POSTGRES_PASSWORD
+      value: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgis-service
+spec:
+  selector:
+    name: postgis
+  ports:
+  - protocol: TCP
+    port: 5432
+
