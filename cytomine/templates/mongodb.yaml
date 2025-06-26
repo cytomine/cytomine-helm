@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: mongodb
+  name: mongodb
+spec:
+  containers:
+  - name: mongodb
+    image: mongodb/mongodb-community-server
+    ports:
+    - containerPort: 27017
+    env:
+    - name: MONGO_INITDB_ROOT_USERNAME
+      value: mongoadmin
+    - name: MONGO_INITDB_ROOT_PASSWORD
+      value: password
+    - name: MONGO_INITDB_DATABASE
+      value: cytomine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    name: mongodb
+  ports:
+  - protocol: TCP
+    port: 27017
+
