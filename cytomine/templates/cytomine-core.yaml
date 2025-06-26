@@ -11,28 +11,26 @@ spec:
     ports:
       - containerPort: 8080
     env:
-    - name: POSTGIS_PASS
-      value: password
     - name: MONGO_DB_NAME
       value: cytomine
     - name: MONGO_HOST
-      value: mongo
+      value: "mongodb-service.{{ .Release.Namespace }}.svc.cluster.local"
     - name: MONGO_PASS
-      value: secret
+      value: cytomine
     - name: MONGO_PORT
       value: "27017"
     - name: MONGO_USER
       value: mongoadmin
     - name: POSTGIS_DB_NAME
-      value: docker
+      value: cytomine
     - name: POSTGIS_HOST
-      value: postgis
+      value: "postgis-service.{{ .Release.Namespace }}.svc.cluster.local"
     - name: POSTGIS_PASS
-      value: docker
+      value: cytomine
     - name: POSTGIS_PORT
       value: "5432"
     - name: POSTGIS_USER
-      value: docker
+      value: cytomine
 
 ---
 apiVersion: v1

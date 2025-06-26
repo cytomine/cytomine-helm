@@ -7,12 +7,16 @@ metadata:
 spec:
   containers:
   - name: postgis
-    image: postgis/postgis:latest
+    image: cytomine/postgis:latest
     ports:
     - containerPort: 5432
     env:
     - name: POSTGRES_PASSWORD
-      value: password
+      value: cytomine
+    - name: POSTGRES_DB
+      value: cytomine
+    - name: POSTGRES_USER
+      value: cytomine
 ---
 apiVersion: v1
 kind: Service

@@ -14,7 +14,7 @@ spec:
     - name: MONGO_INITDB_ROOT_USERNAME
       value: mongoadmin
     - name: MONGO_INITDB_ROOT_PASSWORD
-      value: password
+      value: cytomine
     - name: MONGO_INITDB_DATABASE
       value: cytomine
 ---
