@@ -23,9 +23,9 @@ spec:
         env:
         - name: POSTGRES_PASSWORD
           value: cytomine
-        - name: POSTGRES_DB
-          value: cytomine
         - name: POSTGRES_USER
+          value: cytomine
+        - name: POSTGRES_NAME
           value: cytomine
 ---
 apiVersion: v1
