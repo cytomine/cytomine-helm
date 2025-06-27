@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cytomine-core-deployment
+  name: cytomine-core
   labels:
     app: cytomine-core
 spec:
@@ -24,7 +24,7 @@ spec:
         - name: MONGO_DB_NAME
           value: cytomine
         - name: MONGO_HOST
-          value: "mongodb-service.{{ .Release.Namespace }}.svc.cluster.local"
+          value: "mongodb.{{ .Release.Namespace }}.svc.cluster.local"
         - name: MONGO_PASS
           value: cytomine
         - name: MONGO_PORT
@@ -34,7 +34,7 @@ spec:
         - name: POSTGIS_DB_NAME
           value: cytomine
         - name: POSTGIS_HOST
-          value: "postgis-service.{{ .Release.Namespace }}.svc.cluster.local"
+          value: "postgis.{{ .Release.Namespace }}.svc.cluster.local"
         - name: POSTGIS_PASS
           value: cytomine
         - name: POSTGIS_PORT
@@ -45,12 +45,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cytomine-core-service
+  name: cytomine-core
 spec:
   selector:
     name: cytomine-core
   ports:
   - name: cytomine-core-port
     protocol: TCP
-    port: 8080
+    port: '{{ .Values.cytomineCore.port }}:8080'
 
