@@ -7,3 +7,4 @@ This repository will host all our deployed instances files.
 ## Future
 
 - [ ] setup CI to test new helm releases on our cluster
+- [ ] define health endpoints
