@@ -19,7 +19,7 @@ spec:
       - name: cytomine-core
         image: cytomine/core:latest
         ports:
-          - containerPort: 8080
+          - containerPort: {{ .Values.cytomineCore.port }}
         env:
         - name: MONGO_DB_NAME
           value: cytomine
@@ -52,5 +52,5 @@ spec:
   ports:
   - name: cytomine-core-port
     protocol: TCP
-    port: '{{ .Values.cytomineCore.port }}:8080'
+    port: {{ .Values.cytomineCore.port }}
 

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cytomine-ui
+  labels:
+    app: cytomine-ui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cytomine-ui
+  template:
+    metadata:
+      labels:
+        app: cytomine-ui
+      name: cytomine-ui
+    spec:
+      containers:
+      - name: cytomine-ui
+        image: cytomine/web-ui:latest
+        ports:
+          - containerPort: 8080
+        #env:
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cytomine-ui
+spec:
+  selector:
+    name: cytomine-ui
+  ports:
+  - name: cytomine-ui-port
+    protocol: TCP
+    port: 8080
+
