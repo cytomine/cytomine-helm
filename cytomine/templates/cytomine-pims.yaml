@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cytomine-pims
+  labels:
+    app: cytomine-pims
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cytomine-pims
+  template:
+    metadata:
+      labels:
+        app: cytomine-pims
+      name: cytomine-pims
+    spec:
+      containers:
+      - name: pims
+        image: cytomine/pims:0.13.6
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: config-volume
+            mountPath: /data
+      volumes:
+      - name: config-volume
+        configMap:
+          name: pims-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pims-config
+data:
+  VALUE: test
+---
+

@@ -52,5 +52,5 @@ spec:
   ports:
   - name: cytomine-core-port
     protocol: TCP
-    port: '{{ .Values.cytomineCore.port }}:8080'
+    port: {{ .Values.cytomineCore.port }}
 
