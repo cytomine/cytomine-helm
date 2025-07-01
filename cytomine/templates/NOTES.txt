@@ -1,1 +1,0 @@
-You can launch cytomine at http://localhost:{{ .Values.cytomineCore.port }}
