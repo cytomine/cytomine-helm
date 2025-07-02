@@ -8,7 +8,6 @@ metadata:
   labels:
     role: web-ui
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-web-ui
     release: {{ .Release.Name }}
 spec:

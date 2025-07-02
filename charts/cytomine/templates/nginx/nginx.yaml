@@ -8,7 +8,6 @@ metadata:
   labels:
     role: nginx
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-nginx
     release: {{ .Release.Name }}
 spec:

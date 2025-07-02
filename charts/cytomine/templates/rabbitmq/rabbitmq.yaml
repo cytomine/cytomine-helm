@@ -8,7 +8,6 @@ metadata:
   labels:
     role: rabbitmq
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-rabbitmq
     release: {{ .Release.Name }}
 spec:

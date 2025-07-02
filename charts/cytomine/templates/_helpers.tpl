@@ -35,7 +35,6 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "cytomine.labels" -}}
-helm.sh/chart: {{ include "cytomine.chart" . }}
 {{ include "cytomine.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}

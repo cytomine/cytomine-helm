@@ -8,7 +8,6 @@ metadata:
   labels:
     role: core
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-core
     release: {{ .Release.Name }}
 spec:
