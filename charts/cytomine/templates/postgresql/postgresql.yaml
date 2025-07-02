@@ -9,7 +9,6 @@ metadata:
   labels:
     role: postgresql
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-postgis
     release: {{ .Release.Name }}
 spec:
