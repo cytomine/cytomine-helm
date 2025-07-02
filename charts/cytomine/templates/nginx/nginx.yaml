@@ -35,9 +35,6 @@ spec:
         - name: {{ include "cytomine.name" . }}-nginx-config
           configMap:
             name: {{ include "cytomine.name" . }}-nginx-config
-        - name: image-temp
-          persistentVolumeClaim:
-            claimName: {{ template "cytomine.name" . }}-temp-image-claim
         - name: temp
           emptyDir: {}
       containers:
