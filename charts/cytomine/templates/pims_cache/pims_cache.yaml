@@ -8,7 +8,6 @@ metadata:
   labels:
     role: {{ include "cytomine.name" . }}-pims-cache
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-pims-cache
     release: {{ .Release.Name }}
 spec:

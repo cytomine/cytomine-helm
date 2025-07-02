@@ -9,7 +9,6 @@ metadata:
   labels:
     role: mongodb
     app: {{ include "cytomine.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
     component: {{ .Release.Name }}-mongodb
     release: {{ .Release.Name }}
 spec:
