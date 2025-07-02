@@ -1,4 +1,5 @@
 {{ if .Values.mongodb.deploy }}
+{{- $storageClassName := .Values.mongodb.storageClassName | required ".Values.mongodb.storageClassName is required." -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -73,7 +74,7 @@ spec:
     - metadata:
         name: mongodb-storage
       spec:
-        storageClassName: {{ .Values.readOnceStorageClass }}
+        storageClassName: {{ $storageClassName }}
         accessModes:
           - ReadWriteOnce
         resources:
