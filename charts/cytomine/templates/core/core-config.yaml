@@ -28,7 +28,7 @@ stringData:
           host: $MONGO_HOST
 
     javamelody:
-      enabled: true      
+      enabled: true
       init-parameters:
         authorized-users: $JAVAMELODY_USER:$JAVAMELODY_PASS
         storage-directory: $JAVAMELODY_PATH
@@ -80,7 +80,7 @@ stringData:
         jwt:
           # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
           secret: $JWT_SECRET
-  
+
   logback.xml: |-
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE configuration>
@@ -174,7 +174,7 @@ data:
   MONGO_PORT: "{{ .Values.mongodb.port }}"
   MONGO_USER: {{ .Values.mongodb.username }}
   POSTGIS_DB_NAME: {{ .Values.postgresql.user }}
-  POSTGIS_HOST: {{ include "cytomine.name" . }}-postgis
+  POSTGIS_HOST: {{ include "cytomine.name" . }}-postgis.{{ .Release.Namespace }}.svc.cluster.local
   POSTGIS_PORT: "{{ .Values.postgresql.port }}"
   POSTGIS_USER: {{ .Values.postgresql.user }}
   SMTP_HOST: {{ .Values.smtpHost }}
