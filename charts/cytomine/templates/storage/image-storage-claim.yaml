@@ -1,12 +1,12 @@
-{{ if or .Values.bioformat.deploy }}
+{{ if .Values.pims.deploy }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ template "cytomine.name" . }}-image-claim
 spec:
-  storageClassName: {{ .Values.readManyStorageClass }}
+  storageClassName: {{ .Values.pims.storageClassName }}
   accessModes:
-    - ReadWriteMany
+    - '{{ .Values.pims.storageAccessMode }}'
   resources:
     requests:
       storage: {{ .Values.imageStorage }}

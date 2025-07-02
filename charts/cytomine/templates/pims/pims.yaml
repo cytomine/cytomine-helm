@@ -1,6 +1,6 @@
 {{ if .Values.pims.deploy }}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "cytomine.name" . }}-pims
   annotations:

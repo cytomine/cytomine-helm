@@ -16,7 +16,7 @@ global:
   publicIP: "192.168.49.2/32"
   protocol: TCP
 readOnceStorageClass: ""
-readManyStorageClass: ""
+readManyStorageClass: null
 
 
 # Resource settings
@@ -90,6 +90,8 @@ postgresql:
       memory: "512Mi"
       cpu: "200m"
       ephemeral-storage: 1Gi
+  storageClassName: null
+  storageAccessMode: ReadWriteOnce
 
 # MongoDB - Secondary database.Stores activity data
 mongodb:
@@ -108,6 +110,9 @@ mongodb:
       memory: "256Mi"
       cpu: "200m"
       ephemeral-storage: 1Gi
+  mongoStorageHostPath: null
+  storageClassName: null
+  storageAccessMode: ReadWriteOnce
 
 # Redis - Cache for fast image extractor
 pims_cache:
@@ -122,20 +127,6 @@ pims_cache:
       memory: "256Mi"
       cpu: "200m"
       ephemeral-storage: 32Mi
-
-# Bioformat - Support for additonal image formats
-bioformat:
-  deploy: true
-  port: 4321
-  resources:
-    requests:
-      memory: "128Mi"
-      cpu: "100m"
-      ephemeral-storage: 1Gi
-    limits:
-      memory: "128Mi"
-      cpu: "200m"
-      ephemeral-storage: 1Gi
 
 # Core - Main Cytomine Server
 core:
@@ -181,6 +172,9 @@ pims:
       memory: "4Gi"
       cpu: "1000m"
       ephemeral-storage: 1Gi
+  storageClassName: null
+  storageAccessMode: ReadWriteOnce
+
 # Nginx - Main HTTP proxy dispatching incoming requests
 nginx:
   deploy: true

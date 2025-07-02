@@ -1,4 +1,5 @@
 {{ if .Values.postgresql.deploy }}
+{{- $storageClassName := .Values.postgresql.storageClassName | required ".Values.postgresql.storageClassName is required." -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -101,7 +102,7 @@ spec:
     - metadata:
         name: postgres-storage
       spec:
-        storageClassName: {{ .Values.readOnceStorageClass }}
+        storageClassName: {{ .Values.postgresql.storageClassName }}
         accessModes:
           - ReadWriteOnce
         resources:
