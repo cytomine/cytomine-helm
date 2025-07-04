@@ -140,7 +140,7 @@ spec:
           requests:
             storage: {{ .Values.imageStorage }}
     - metadata:
-        name: temp-image
+        name: image-temp
       spec:
         storageClassName: {{ $tempImageStorageClassName }}
         accessModes:
