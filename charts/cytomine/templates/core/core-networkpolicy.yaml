@@ -7,7 +7,6 @@ spec:
     matchLabels:
       app: {{ include "cytomine.name" . }}-core
   policyTypes:
-    - Ingress
     - Egress
   egress:
   #Mongodb
@@ -74,12 +73,3 @@ spec:
         - port: 53
           protocol: UDP
 
-  ingress:
-  #Nginx
-    - from:
-        - podSelector:
-            matchLabels:
-              app: {{ include "cytomine.name" . }}-nginx
-      ports:
-        - protocol: {{ .Values.global.protocol }}
-          port: {{ .Values.core.port }}
