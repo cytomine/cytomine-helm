@@ -1,7 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "cytomine.name" . }}-ingress
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "cytomine.name" . }}-ingress-{{ .Release.Namespace }}
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 2000m
     nginx.ingress.kubernetes.io/enable-access-log: "true"
