@@ -12,6 +12,15 @@ spec:
     - host: {{ .Values.global.domainName }}
       http:
         paths:
+          - path: /server
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "cytomine.name" . }}-core
+                port:
+                  number: {{ .Values.core.port }}
+      http:
+        paths:
           - path: /
             pathType: Prefix
             backend:
