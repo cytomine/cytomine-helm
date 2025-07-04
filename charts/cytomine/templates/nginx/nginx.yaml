@@ -127,4 +127,23 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: image
+      spec:
+        storageClassName: {{ $imageStorageClassName }}
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: {{ .Values.imageStorage }}
+    - metadata:
+        name: temp-image
+      spec:
+        storageClassName: {{ $tempImageStorageClassName }}
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: {{ .Values.tempImageStorage }}
 {{ end }}
