@@ -118,7 +118,7 @@ spec:
       spec:
         storageClassName: {{ $imageStorageClassName }}
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
         resources:
           requests:
             storage: {{ .Values.imageStorage }}
@@ -127,7 +127,7 @@ spec:
       spec:
         storageClassName: {{ $tempImageStorageClassName }}
         accessModes:
-          - ReadWriteOnce
+          - ReadWriteMany
         resources:
           requests:
             storage: {{ .Values.tempImageStorage }}
