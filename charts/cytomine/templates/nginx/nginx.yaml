@@ -1,4 +1,6 @@
 {{ if .Values.nginx.deploy }}
+{{- $imageStorageClassName := .Values.pims.imageStorage.storageClassName | required ".Values.pims.imageStorage.storageClassName is required." -}}
+{{- $tempImageStorageClassName := .Values.pims.tempImageStorage.storageClassName | required ".Values.pims.tempImageStorage.storageClassName is required." -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
