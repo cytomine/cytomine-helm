@@ -4,6 +4,8 @@ metadata:
   name: {{ include "cytomine.name" . }}-ingress
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 2000m
+    nginx.ingress.kubernetes.io/enable-access-log: "true"
+    nginx.ingress.kubernetes.io/enable-error-log: "true"
 spec:
   rules:
     - host: {{ .Values.global.domainName }}
