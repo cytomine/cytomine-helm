@@ -1,4 +1,6 @@
 {{ if .Values.pims.deploy }}
+{{- $imageStorageClassName := .Values.pims.imageStorage.storageClassName | required ".Values.pims.imageStorage.storageClassName" -}}
+{{- $tempImageStorageClassName := .Values.pims.tempImageStorage.storageClassName | required ".Values.pims.tempImageStorage.storageClassName is required." -}}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -32,12 +34,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: images
-          persistentVolumeClaim:
-            claimName: {{ template "cytomine.name" . }}-image-claim
-        - name: image-temp
-          persistentVolumeClaim:
-            claimName: {{ template "cytomine.name" . }}-temp-image-claim
         - name: pims-logging
           configMap:
             name: {{ template "cytomine.name" . }}-pims-logging
@@ -116,4 +112,23 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: image-claim
+      spec:
+        storageClassName: {{ $imageStorageClassName }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.imageStorage }}
+    - metadata:
+        name: temp-image-claim
+      spec:
+        storageClassName: {{ $tempImageStorageClassName }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.tempImageStorage }}
 {{ end }}
