@@ -171,9 +171,10 @@ pims:
       memory: "4Gi"
       cpu: "1000m"
       ephemeral-storage: 1Gi
-  storageClassName: null
-  storageAccessMode: ReadWriteOnce
-
+  imageStorage:
+    storageClassName: null
+  tempImageStorage:
+    storageClassName: null
 # Nginx - Main HTTP proxy dispatching incoming requests
 nginx:
   deploy: true
