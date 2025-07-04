@@ -19,8 +19,6 @@ spec:
                 name: {{ include "cytomine.name" . }}-core
                 port:
                   number: {{ .Values.core.port }}
-      http:
-        paths:
           - path: /
             pathType: Prefix
             backend:
