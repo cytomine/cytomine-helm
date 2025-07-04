@@ -7,7 +7,7 @@ metadata:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
     role: core
-    app: {{ include "cytomine.name" . }}
+    app: {{ include "cytomine.name" . }}-core
     component: {{ .Release.Name }}-core
     release: {{ .Release.Name }}
 spec:
