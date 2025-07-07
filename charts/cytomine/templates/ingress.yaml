@@ -4,7 +4,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   name: {{ include "cytomine.name" . }}-ingress
   annotations:
-    kubernetes.io/ingress.class: public
     nginx.ingress.kubernetes.io/proxy-body-size: 2000m
     nginx.ingress.kubernetes.io/enable-access-log: "true"
     nginx.ingress.kubernetes.io/enable-error-log: "true"
@@ -12,6 +11,7 @@ metadata:
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
 spec:
+  ingressClassName: public
   rules:
     - host: {{ .Values.global.domainName }}
       http:
