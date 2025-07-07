@@ -28,7 +28,7 @@ http {
     server_tokens off;
 
     # Use Docker's resolver to resolve container names when used with set and proxy_pass
-    # resolver kube-dns.kube-system.svc.cluster.local valid=30s;
+    resolver kube-dns.kube-system.svc.cluster.local valid=30s;
 
     log_format  main  '$scheme - h=$host - hh=$http_host - sn=$server_name - ra=$remote_addr - ru=$remote_user [$time_local] req="$request" '
                           's=$status bbs=$body_bytes_sent hr="$http_referer" '
