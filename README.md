@@ -1,10 +1,7 @@
-# Infrastructure repository
+# Cytomine - Helm
 
-This repository will host all our deployed instances files.
+This is the new official Helm Chart for cytomine.
 
-# TODO
+It is based on [NBIS version](https://github.com/NBISweden/cytomine-bp-helm)
 
-## Future
-
-- [ ] setup CI to test new helm releases on our cluster
-- [ ] define health endpoints
+For now it is under heavy development so please allow us some time before using it.
