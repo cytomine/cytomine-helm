@@ -10,6 +10,8 @@ metadata:
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
+    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/issuer: letsencrypt
 spec:
   ingressClassName: public
   rules:
