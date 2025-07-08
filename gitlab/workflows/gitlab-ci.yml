@@ -1,0 +1,12 @@
+name: Comment with the diff.
+on: [push]
+
+jobs:
+  Build:
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: azure/setup-helm@v4.3.0
+      - run: helm install cytomine charts/cytomine/ --debug --dry-run -f example/values.yaml
+
