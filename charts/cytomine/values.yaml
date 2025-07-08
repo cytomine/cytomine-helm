@@ -177,7 +177,7 @@ pims:
     storageClassName: null
 # Nginx - Main HTTP proxy dispatching incoming requests
 nginx:
-  deploy: true
+  deploy: false
   port: 9000
   serverID: null
   resources:
