@@ -1,3 +1,35 @@
+{{/* PIMS hostname */}}
+{{- define "pims.hostname" -}}
+{{- .Values.global.imsDomainName | default (printf "ims.%s" .Values.global.domainName )    }}
+{{- end }}
+
+
+{{/* PIMS url */}}
+{{- define "pims.url" -}}
+{{- printf "https://%s" (include "pims.hostname" .) }}
+{{- end }}
+
+{{/* URL Upload hostname */}}
+{{- define "url_upload.hostname" -}}
+{{- .Values.global.urlUpload | default (printf "upload.%s" .Values.global.domainName )    }}
+{{- end }}
+
+{{/* URL Upload url */}}
+{{- define "url_upload.url" -}}
+{{- printf "https://%s" (include "url_upload.hostname" .) }}
+{{- end }}
+
+{{/* Core hostname */}}
+{{- define "core.hostname" -}}
+{{- .Values.global.urlCore | default (printf "%s" .Values.global.domainName )    }}
+{{- end }}
+
+{{/* Core url */}}
+{{- define "core.url" -}}
+{{- printf "https://%s/server" (include "pims.hostname" .) }}
+{{- end }}
+
+
 {{/*
 Expand the name of the chart.
 */}}

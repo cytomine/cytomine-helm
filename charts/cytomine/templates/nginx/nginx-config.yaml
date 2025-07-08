@@ -23,7 +23,7 @@ data:
     INTERNAL_URLS_WEB_UI: {{ include "cytomine.name" . }}-web-ui:{{ .Values.web_ui.port }}
     UPLOAD_PATH: /tmp/uploaded
     URLS_CORE: {{ .Values.global.domainName }}
-    URLS_IMAGE_SERVER: {{ .Values.global.imsDomainName }}
-    URLS_UPLOAD: {{ .Values.global.urlUpload  }}
+    URLS_IMAGE_SERVER: {{ include "pims.hostname" .}}
+    URLS_UPLOAD: {{ include "url_upload.hostname" . }}
     NGINX_PORT: "{{ .Values.nginx.port }}"
 {{ end }}
