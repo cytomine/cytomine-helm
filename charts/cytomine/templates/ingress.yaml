@@ -31,7 +31,7 @@ spec:
                 name: {{ include "cytomine.name" . }}-web-ui
                 port:
                   number: {{ .Values.web_ui.port }}
-    - host: {{ .Values.global.urlUpload }}
+    - host: {{ include "url_upload.hostname" . }}
       http:
         paths:
           - path: /
@@ -41,7 +41,7 @@ spec:
                 name: {{ include "cytomine.name" . }}-nginx
                 port:
                   number: {{ .Values.nginx.port }}
-    - host: {{ .Values.global.imsDomainName }}
+    - host: {{ include "pims.hostname" . }}
       http:
         paths:
           - path: /
@@ -51,11 +51,9 @@ spec:
                 name: {{ include "cytomine.name" . }}-nginx
                 port:
                   number: {{ .Values.nginx.port }}
-  {{ if .Values.global.use_tls }}
   tls:
   - hosts:
-    - {{ .Values.global.domainName }}
-    - {{ .Values.global.urlUpload }}
-    - {{ .Values.global.imsDomainName }}
+    - {{ include "core.hostname" . }}
+    - {{ include "url_upload.hostname" . }}
+    - {{ include "pims.hostname" . }}
     secretName: {{ include "cytomine.name" . }}-ingress-tls
-  {{ end }}

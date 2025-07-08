@@ -7,10 +7,11 @@
 #
 
 global:
-  domainName: "cytomine.local"
-  imsDomainName: "ims.cytomine.local"
-  urlUpload: "upload.cytomine.local"
-  use_tls: false
+  domainName: null
+  # will be generated as ims.<domainName>
+  imsDomainName: null
+  # will be generated as upload.<domainName>
+  urlUpload: null
   affinity: {}
   tolerations: {}
   publicIP: "192.168.49.2/32"
@@ -161,7 +162,6 @@ pims:
   port: 5000
   public_key: ca9020d0-76fe-4f05-8371-6cbe885c2b29
   private_key: db087410-c2bd-4fa9-8aca-a9ad98226657
-  pims_url: http://ims.cytomine.local
   resources:
     requests:
       memory: "4Gi"
@@ -203,8 +203,6 @@ web_ui:
       memory: "256Mi"
       cpu: "200m"
       ephemeral-storage: 32Mi
-  url_core: https://cytomine.local
-  url_upload: https://upload.cytomine.local
   commercial_version: CE2023.1
 
 #

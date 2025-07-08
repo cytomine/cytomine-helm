@@ -181,9 +181,9 @@ data:
   SMTP_PORT: "{{ .Values.smtpPort }}"
   SMTP_USER: user
   STORAGE_PATH: /data/images
-  URL_CORE: {{ .Values.web_ui.url_core }}
-  URL_PIMS1: {{ .Values.pims.pims_url }}
-  URL_PIMS2: {{ .Values.pims.pims_url }}
+  URL_CORE: {{ include "core.url" . }}
+  URL_PIMS1: {{ include "pims.url" . }}
+  URL_PIMS2: {{ include "pims.url" . }}
 {{ end }}
 ---
 {{ if .Values.core.deploy }}

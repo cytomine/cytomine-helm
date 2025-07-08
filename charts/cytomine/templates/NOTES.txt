@@ -1,3 +1,5 @@
+Domain is {{ required ".Values.global.domainName is required!" .Values.global.domainName }}
+
 Cytomine is being deployed at {{ .Values.global.domainName }}.
 
 Admin credentials are:
