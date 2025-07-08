@@ -101,7 +101,7 @@ spec:
     - metadata:
         name: postgres-storage
       spec:
-        storageClassName: {{ .Values.postgresql.storageClassName }}
+        storageClassName: {{ $storageClassName }}
         accessModes:
           - ReadWriteOnce
         resources:
