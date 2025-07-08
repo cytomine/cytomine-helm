@@ -10,13 +10,13 @@
 {{- end }}
 
 {{/* URL Upload hostname */}}
-{{- define "url_upload.hostname" -}}
+{{- define "upload.hostname" -}}
 {{- .Values.global.urlUpload | default (printf "upload.%s" .Values.global.domainName )    }}
 {{- end }}
 
 {{/* URL Upload url */}}
-{{- define "url_upload.url" -}}
-{{- printf "https://%s" (include "url_upload.hostname" .) }}
+{{- define "upload.url" -}}
+{{- printf "https://%s" (include "upload.hostname" .) }}
 {{- end }}
 
 {{/* Core hostname */}}
