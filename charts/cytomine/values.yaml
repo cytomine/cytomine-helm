@@ -203,8 +203,8 @@ web_ui:
       memory: "256Mi"
       cpu: "200m"
       ephemeral-storage: 32Mi
-  url_core: http://cytomine.local
-  url_upload: http://upload.cytomine.local
+  url_core: https://cytomine.local
+  url_upload: https://upload.cytomine.local
   commercial_version: CE2023.1
 
 #
