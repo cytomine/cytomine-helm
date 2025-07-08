@@ -26,7 +26,12 @@
 
 {{/* Core url */}}
 {{- define "core.url" -}}
-{{- printf "https://%s/server" (include "pims.hostname" .) }}
+{{- printf "https://%s" (include "core.hostname" .) }}
+{{- end }}
+
+{{/* Core url */}}
+{{- define "core.url_full" -}}
+{{- printf "%s/server" (include "core.url" .) }}
 {{- end }}
 
 
