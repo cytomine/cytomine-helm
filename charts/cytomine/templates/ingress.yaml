@@ -45,7 +45,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-nginx
+                name: {{ include "cytomine.name" . }}-pims
                 port:
                   number: {{ .Values.nginx.port }}
     - host: {{ include "pims.hostname" . }}
@@ -55,7 +55,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-nginx
+                name: {{ include "cytomine.name" . }}-pims
                 port:
                   number: {{ .Values.nginx.port }}
   tls:
