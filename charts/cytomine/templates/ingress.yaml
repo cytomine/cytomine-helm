@@ -7,6 +7,11 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: 2000m
     nginx.ingress.kubernetes.io/enable-access-log: "true"
     nginx.ingress.kubernetes.io/enable-error-log: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
+    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
@@ -18,6 +23,13 @@ spec:
       http:
         paths:
           - path: /server
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "cytomine.name" . }}-core
+                port:
+                  number: {{ .Values.core.port }}
+          - path: /api
             pathType: Prefix
             backend:
               service:
@@ -38,9 +50,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-nginx
+                name: {{ include "cytomine.name" . }}-pims
                 port:
-                  number: {{ .Values.nginx.port }}
+                  number: {{ .Values.pims.port }}
     - host: {{ include "pims.hostname" . }}
       http:
         paths:
@@ -48,9 +60,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-nginx
+                name: {{ include "cytomine.name" . }}-pims
                 port:
-                  number: {{ .Values.nginx.port }}
+                  number: {{ .Values.pims.port }}
   tls:
   - hosts:
     - {{ include "core.hostname" . }}

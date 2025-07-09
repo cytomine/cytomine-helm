@@ -71,7 +71,7 @@ spec:
               mountPath: "/data/images"
             - name: images
               mountPath: "/data/pims"
-            - name: image-temp
+            - name: images-temp
               mountPath: "/tmp/uploaded"
             - name: pims-logging
               mountPath: /cm_configs/app/logging.yml
@@ -114,7 +114,7 @@ spec:
       {{- end }}
   volumeClaimTemplates:
     - metadata:
-        name: image
+        name: images
       spec:
         storageClassName: {{ $imageStorageClassName }}
         accessModes:
@@ -123,7 +123,7 @@ spec:
           requests:
             storage: {{ .Values.imageStorage }}
     - metadata:
-        name: image-temp
+        name: images-temp
       spec:
         storageClassName: {{ $tempImageStorageClassName }}
         accessModes:
