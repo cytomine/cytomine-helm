@@ -53,7 +53,7 @@ stringData:
 
       serverId: $SERVER_ID
       serverURL: $URL_CORE
-      imageServerURL: [$URL_PIMS1, $URL_PIMS2]
+      imageServerURL: [$URL_PIMS1]
 
       storagePath: $STORAGE_PATH
       adminPassword: $ADMIN_PASSWORD
