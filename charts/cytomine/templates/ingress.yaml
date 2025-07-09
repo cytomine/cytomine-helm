@@ -47,7 +47,7 @@ spec:
               service:
                 name: {{ include "cytomine.name" . }}-pims
                 port:
-                  number: {{ .Values.nginx.port }}
+                  number: {{ .Values.pims.port }}
     - host: {{ include "pims.hostname" . }}
       http:
         paths:
@@ -57,7 +57,7 @@ spec:
               service:
                 name: {{ include "cytomine.name" . }}-pims
                 port:
-                  number: {{ .Values.nginx.port }}
+                  number: {{ .Values.pims.port }}
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
