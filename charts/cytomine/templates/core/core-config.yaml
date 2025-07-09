@@ -181,9 +181,8 @@ data:
   SMTP_PORT: "{{ .Values.smtpPort }}"
   SMTP_USER: user
   STORAGE_PATH: /data/images
-  URL_CORE: {{ include "core.url" . }}
-  URL_PIMS1: {{ include "pims.url" . }}
-  URL_PIMS2: {{ include "pims.url" . }}
+  URL_CORE: {{ include "cytomine.name" . }}-core-0.{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
+  URL_PIMS1: {{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
 {{ end }}
 ---
 {{ if .Values.core.deploy }}
