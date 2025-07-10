@@ -70,8 +70,8 @@ rabbitmq:
       cpu: "100m"
       ephemeral-storage: 32Mi
     limits:
-      memory: "512Mi"
-      cpu: "400m"
+      memory: "4Gi"
+      cpu: "1000m"
       ephemeral-storage: 32Mi
 
 # Postgresql - Main database.Stores most of data
