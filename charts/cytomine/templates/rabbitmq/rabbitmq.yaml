@@ -54,14 +54,20 @@ spec:
           resources:
             {{- toYaml .Values.rabbitmq.resources | nindent 12 }}
           livenessProbe:
-            tcpSocket:
-              port: amqp
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
+            exec:
+              command:
+                - "rabbitmq-diagnostics"
+                - "ping"
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 15
           readinessProbe:
-            tcpSocket:
-              port: amqp
-            initialDelaySeconds: 30
+            exec:
+              command:
+                - "rabbitmq-diagnostics"
+                - "check_port_connectivity"
+            initialDelaySeconds: 10
+            periodSeconds: 30
             timeoutSeconds: 15
       {{- with .Values.global.tolerations }}
       tolerations:
