@@ -50,7 +50,7 @@ images:
   mongodb: cytomine/mongo:0.1.0
   pims_cache: redis:7
   core: cytomine/core:4.4.1
-  pims: cytomine/pims-ce-package:1.0.0
+  pims: cytomine/pims-ce-package:ce-1.0.0
   nginx: cytomine/nginx:2.0.0
   web_ui: cytomine/web_ui:2.6.2
   pullPolicy: Always
