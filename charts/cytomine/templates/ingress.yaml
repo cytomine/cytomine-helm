@@ -12,7 +12,6 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
     nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full
-    nginx.ingress.kubernetes.io/proxy-body-size: 20gb
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
@@ -100,7 +99,6 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
     nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full
-    nginx.ingress.kubernetes.io/proxy-body-size: 20gb
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
