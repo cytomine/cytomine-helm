@@ -45,7 +45,7 @@ spec:
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: cytomine-pims-config-1
+                name: cytomine-pims-config-2
           env:
             - name: POSTGRES_DB
               value: {{ .Values.postgresql.database }}

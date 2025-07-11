@@ -166,7 +166,7 @@ data:
   INSTANCE_HOST_SUPPORT_MAIL: None
   REVERSE_PROXY_URL: "{{ include "cytomine.name" . }}-nginx:{{ .Values.nginx.port }}"
   SERVER_ID: {{ .Values.core.server_id }}
-  INSTANCE_HOST_WEBSITE_URL: {{ include "cytomine.name" . }}-core-0.{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
+  INSTANCE_HOST_WEBSITE_URL: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
   JAVAMELODY_PATH: /javamelody-core
   JAVAMELODY_USER: admin
   MONGO_DB_NAME: {{ include "cytomine.name" . }}
@@ -181,7 +181,7 @@ data:
   SMTP_PORT: "{{ .Values.smtpPort }}"
   SMTP_USER: user
   STORAGE_PATH: /data/images
-  URL_CORE: {{ include "cytomine.name" . }}-core-0.{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
+  URL_CORE: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
   URL_PIMS1: http://{{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
 {{ end }}
 ---
