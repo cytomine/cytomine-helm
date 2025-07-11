@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-config-1
+  name: {{ include "cytomine.name" . }}-pims-config-2
 data:
     DEFAULT_ANNOTATION_ORIGIN: LEFT_TOP
     DEFAULT_IMAGE_SIZE_SAFETY_MODE: SAFE_REJECT
@@ -20,7 +20,7 @@ data:
     PIMS_URL: {{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
     cache_url: redis://{{ include "cytomine.name" . }}-pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}
     ROOT: /data/images
-    INTERNAL_URL_CORE: http://{{ include "cytomine.name" . }}-core-0.{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}
+    INTERNAL_URL_CORE: http://{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}
 {{ end }}
 ---
 {{ if .Values.pims.deploy }}
