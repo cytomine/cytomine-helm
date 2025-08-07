@@ -22,3 +22,5 @@ spec:
         envFrom:
         - configMapRef:
             name: iam
+        - secretRef:
+            name: {{ include "cytomine.name" . }}-postgresql-secret
