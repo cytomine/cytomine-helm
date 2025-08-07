@@ -187,7 +187,10 @@ web_ui:
       memory: "256Mi"
       cpu: "200m"
       ephemeral-storage: 32Mi
-  commercial_version: CE2023.1
+  replicas: 1
+
+iam:
+  port: 8080
 
 iam:
   port: 8080
