@@ -39,6 +39,23 @@ spec:
           secret:
             secretName: {{ include "cytomine.name" . }}-postgresql-secret
       containers:
+        - name: postgres-keycloak
+          image: postgres
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          env:
+          - name: POSTGRES_USER
+            value: keycloak
+          - name: POSTGRES_DB
+            value: keycloak
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "cytomine.name" . }}-postgresql-secret
+                key: password
+          ports:
+            - name: postgres
+              containerPort: {{ .Values.postgresql.port }}
+              protocol: TCP
         - name: {{ .Chart.Name }}-postgis
           image: "{{ .Values.images.postgresql }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
