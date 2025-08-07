@@ -45,34 +45,20 @@ ingress:
 # Images
 #
 images:
-  rabbitmq: rabbitmq:3
   postgresql: cytomine/postgis:latest
   mongodb: cytomine/mongo:latest
   pims_cache: redis:7
-  core: cytomine/core:4.4.1
+  core: cytomine/core:latest
   pims: cytomine/pims:latest
   nginx: cytomine/nginx:latest
   web_ui: cytomine/web-ui:latest
+  cbir: cytomine/cbir:latest
+  iam: cytomine/iam:latest
   pullPolicy: Always
 
 #
 # Services - these are the services deployed by this chart
 #
-
-# RabbitMQ - Required to use algorithms
-rabbitmq:
-  deploy: true
-  port: 5672
-  managementPort: 15692
-  resources:
-    requests:
-      memory: "512Mi"
-      cpu: "100m"
-      ephemeral-storage: 32Mi
-    limits:
-      memory: "4Gi"
-      cpu: "1000m"
-      ephemeral-storage: 32Mi
 
 # Postgresql - Main database.Stores most of data
 postgresql:
@@ -204,6 +190,9 @@ web_ui:
       cpu: "200m"
       ephemeral-storage: 32Mi
   commercial_version: CE2023.1
+
+iam:
+  port: 8080
 
 #
 # Kuberenetes things
