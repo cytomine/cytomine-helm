@@ -36,6 +36,13 @@ spec:
                 name: {{ include "cytomine.name" . }}-core
                 port:
                   number: {{ .Values.core.port }}
+          - path: /iam
+            pathType: Prefix
+            backend:
+              service:
+                name: iam
+                port:
+                  number: {{ .Values.iam.port }}
           - path: /
             pathType: Prefix
             backend:
