@@ -194,6 +194,9 @@ web_ui:
 iam:
   port: 8080
 
+iam:
+  port: 8080
+
 #
 # Kuberenetes things
 #
