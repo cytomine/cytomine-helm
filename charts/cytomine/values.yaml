@@ -112,7 +112,7 @@ pims_cache:
     limits:
       memory: "256Mi"
       cpu: "200m"
-      ephemeral-storage: 32Mi
+      ephemeral-storage: 1Gi
 
 # Core - Main Cytomine Server
 core:
@@ -172,7 +172,7 @@ nginx:
     limits:
       memory: "256Mi"
       cpu: "200m"
-      ephemeral-storage: 32Mi
+      ephemeral-storage: 1Gi
 
 # Web-ui - Cytomine GUI interface
 web_ui:
@@ -186,7 +186,7 @@ web_ui:
     limits:
       memory: "256Mi"
       cpu: "200m"
-      ephemeral-storage: 32Mi
+      ephemeral-storage: 1Gi
   replicas: 1
 
 iam:
