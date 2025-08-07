@@ -11,7 +11,7 @@ metadata:
     component: {{ .Release.Name }}-web-ui
     release: {{ .Release.Name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.web_ui.replicas }}
   selector:
     matchLabels:
       app: {{ template "cytomine.name" . }}-web-ui
