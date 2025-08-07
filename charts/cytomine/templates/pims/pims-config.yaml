@@ -15,7 +15,6 @@ data:
     cache_enabled: "True"
     task_queue_enabled: "False"
     TASK_QUEUE_ENABLED: "False"
-    TASK_QUEUE_URL: {{ include "cytomine.name" . }}-rabbitmq:{{ .Values.rabbitmq.port }}.{{ .Release.Namespace }}.svc.cluster.local
     PENDING_PATH: /tmp/uploaded
     PIMS_URL: {{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
     cache_url: redis://{{ include "cytomine.name" . }}-pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}
