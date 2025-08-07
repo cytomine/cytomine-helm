@@ -64,8 +64,7 @@ stringData:
       superAdminPublicKey: $SUPER_ADMIN_PUBLIC_KEY
       ImageServerPrivateKey: $IMAGE_SERVER_PRIVATE_KEY
       ImageServerPublicKey: $IMAGE_SERVER_PUBLIC_KEY
-      rabbitMQPrivateKey: $RABBITMQ_PRIVATE_KEY
-      rabbitMQPublicKey: $RABBITMQ_PUBLIC_KEY
+
 
       notification:
         email: your.email@gmail.com
@@ -196,8 +195,6 @@ stringData:
   ADMIN_PRIVATE_KEY: {{ .Values.core.admin_private_key }}
   ADMIN_PUBLIC_KEY: {{ .Values.core.admin_public_key }}
   JWT_SECRET: {{ .Values.core.jwt_secret }}
-  RABBITMQ_PRIVATE_KEY: {{ .Values.core.rabbitmq_private_key }}
-  RABBITMQ_PUBLIC_KEY: {{ .Values.core.rabbitmq_public_key }}
   SUPER_ADMIN_PRIVATE_KEY: {{ .Values.core.super_admin_private_key }}
   SUPER_ADMIN_PUBLIC_KEY: {{ .Values.core.super_admin_public_key }}
   IMAGE_SERVER_PRIVATE_KEY: {{ .Values.core.image_server_private_key }}
