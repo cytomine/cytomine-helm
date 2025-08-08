@@ -13,9 +13,6 @@ spec:
     metadata:
       labels:
         app: iam
-    volumes:
-      - name: keystore
-        emptyDir: {}
     spec:
       volumes:
       - name: keystore
@@ -43,5 +40,5 @@ spec:
               key: password
         volumeMounts:
         - name: keystore
-          mountPath: "/keystore"
-
+          mountPath: "/opt/keycloak/conf/server.keystore"
+          subPath: "server.keystore"
