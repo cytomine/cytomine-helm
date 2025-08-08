@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app: iam
+    volumes:
+      - name: keystore
+        emptyDir: {}
     spec:
       volumes:
       - name: keystore
