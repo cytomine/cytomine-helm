@@ -13,17 +13,17 @@ spec:
     metadata:
       labels:
         app: iam
-    volumes:
+    spec:
+      volumes:
       - name: keystore
         emptyDir: {}
-    spec:
       initContainers:
       - name: certificates-provider
         image: eclipse-temurin:8u462-b08-jdk-ubi9-minimal
         command: ['sh', '-c', 'keytool -genkeypair -alias localhost -keyalg RSA -keysize 2048 -validity 365 -keystore /keystore/server.keystore -dname "cn=Server Administrator,o=Acme,c=GB" -keypass secret -storepass secret']
         volumeMounts:
-          - name: keystore
-            mountPath: "/keystore"
+        - name: keystore
+          mountPath: "/keystore"
       containers:
       - name: iam
         image: "{{ .Values.images.iam }}"
@@ -39,6 +39,6 @@ spec:
               name: postgres-iam-secret
               key: password
         volumeMounts:
-          - name: keystore
-            mountPath: "/keystore"
+        - name: keystore
+          mountPath: "/keystore"
 
