@@ -20,7 +20,7 @@ spec:
       initContainers:
       - name: certificates-provider
         image: eclipse-temurin:8u462-b08-jdk-ubi9-minimal
-        command: ['sh', '-c', 'keytool -genkeypair -alias localhost -keyalg RSA -keysize 2048 -validity 365 -keystore /keystore/server.keystore -dname "cn=Server Administrator,o=Acme,c=GB" -keypass secret -storepass secret']
+        command: ['sh', '-c', 'keytool -genkeypair -alias localhost -keyalg RSA -keysize 2048 -validity 365 -keystore /keystore/server.keystore -dname "cn=Server Administrator,o=Acme,c=GB" -keypass password -storepass password']
         volumeMounts:
         - name: keystore
           mountPath: "/keystore"
