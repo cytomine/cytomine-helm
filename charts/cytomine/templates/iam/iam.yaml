@@ -26,5 +26,5 @@ spec:
         - name: KC_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ include "cytomine.name" . }}-postgresql-secret
+              name: postgres-iam-secret
               key: password
