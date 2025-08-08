@@ -14,6 +14,7 @@ data:
   KC_DB_URL_HOST: postgres-iam-0.postgres-iam.{{ .Release.Namespace }}.svc.cluster.local
   KC_DB_URL_PORT: "5432"
   KC_HOSTNAME: "{{ .Values.global.domainName }}/iam"
+  KC_CONFIG_KEYSTORE_PASSWORD: secret # to change!
   # KC_HOSTNAME_ADMIN: aaa_config.CYTOMINE_HOST
   # KC_ADMIN_EMAIL: cytomine@uliege.be
   # KC_SMTP_HOST: smtp.HOST
