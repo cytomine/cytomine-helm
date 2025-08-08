@@ -31,7 +31,7 @@ spec:
             secretName: postgres-iam-secret
       containers:
         - name: postgres
-          image: "{{ .Values.images.postgresql-iam }}"
+          image: "{{ .Values.images.postgresql_iam }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           volumeMounts:
             - name: postgres-iam-storage

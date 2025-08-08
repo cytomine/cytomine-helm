@@ -11,7 +11,7 @@ data:
   KC_FEATURES: token-exchange
   KC_DB_USERNAME: {{ .Values.postgresql.user }}
   KC_DB_URL_DATABASE: iam
-  KC_DB_URL_HOST: {{ include "cytomine.name" . }}-postgis-0.{{ include "cytomine.name" . }}-postgis.{{ .Release.Namespace }}.svc.cluster.local
+  KC_DB_URL_HOST: postgres-iam-0.postgres-iam.{{ .Release.Namespace }}.svc.cluster.local
   KC_DB_URL_PORT: "5432"
   KC_HOSTNAME: "{{ .Values.global.domainName }}/iam"
   # KC_HOSTNAME_ADMIN: aaa_config.CYTOMINE_HOST

@@ -46,7 +46,7 @@ ingress:
 #
 images:
   postgresql: cytomine/postgis:latest
-  postgresql-iam: postgres:14
+  postgresql_iam: postgres:14
   mongodb: cytomine/mongo:latest
   pims_cache: redis:7
   core: cytomine/core:latest
