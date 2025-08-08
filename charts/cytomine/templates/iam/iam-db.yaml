@@ -30,8 +30,8 @@ spec:
           secret:
             secretName: postgres-iam-secret
       containers:
-        - name: {{ .Chart.Name }}-postgis
-          image: "{{ .Values.images.postgresql }}"
+        - name: postgres
+          image: "{{ .Values.images.postgresql-iam }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           volumeMounts:
             - name: postgres-iam-storage
