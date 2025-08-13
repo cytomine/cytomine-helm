@@ -191,7 +191,7 @@ web_ui:
   replicas: 1
 
 iam:
-  port: 8443
+  port: 8080
 
 cbir:
   port: 8080
