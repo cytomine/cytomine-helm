@@ -14,7 +14,7 @@ spec:
       labels:
         app: iam
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/iam/iam-config.yaml") . | sha256sum }}
+        checksum/config: "{{ include (print $.Template.BasePath "/iam/iam-config.yaml") . | sha256sum }}"
     spec:
       volumes:
       - name: keystore
