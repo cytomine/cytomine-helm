@@ -2,6 +2,14 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# secrets to declare:
+# - admin-iam-secret
+# - postgres-iam-secret
+#
+# kubectl -n <NAMESPACE> create secret generic <SECRET-NAME> --from-literal=password="$(pwgen 64 1)"
+
+
+
 #
 # Globals
 #
@@ -191,7 +199,7 @@ web_ui:
   replicas: 1
 
 iam:
-  port: 8443
+  port: 8080
 
 cbir:
   port: 8080

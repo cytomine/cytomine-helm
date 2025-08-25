@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: iam
+      annotations:
+        checksum/config: "{{ include (print $.Template.BasePath "/iam/iam-config.yaml") . | sha256sum }}"
     spec:
       volumes:
       - name: keystore
@@ -38,10 +40,10 @@ spec:
             secretKeyRef:
               name: postgres-iam-secret
               key: password
-        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+        - name: KC_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-iam-secret
+              name: admin-iam-secret
               key: password
         volumeMounts:
         - name: keystore
