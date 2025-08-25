@@ -48,9 +48,6 @@ spec:
               subPath: data
             - name: postgres-storage
               mountPath: "/var/lib/postgresql"
-            - name: postgres-secret
-              mountPath: "/docker-entrypoint-initdb.d/13_cytomine_user_docker.sql"
-              subPath: pg_dockeruser.sql
             - name: temp
               mountPath: /var/run
             - name: temp
@@ -63,7 +60,7 @@ spec:
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ include "cytomine.name" . }}-postgresql-secret
+                name: postgres-core-secret
                 key: password
           ports:
             - name: postgres
