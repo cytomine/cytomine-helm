@@ -54,7 +54,7 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "cytomine.name" . }}-postgresql-secret
+                  name: postgres-core-secret
                   key: password
             - name: CYTOMINE_PUBLIC_KEY
               valueFrom:

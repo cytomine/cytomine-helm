@@ -44,6 +44,12 @@ spec:
         - name: {{ .Chart.Name }}-core
           image: "{{ .Values.images.core }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          env:
+            - name: POSTGIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-core-secret
+                  key: password
           envFrom:
             - configMapRef:
                 name: cytomine-core-env
