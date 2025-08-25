@@ -35,9 +35,6 @@ spec:
       volumes:
         - name: temp
           emptyDir: {}
-        - name: postgres-secret
-          secret:
-            secretName: {{ include "cytomine.name" . }}-postgresql-secret
       containers:
         - name: {{ .Chart.Name }}-postgis
           image: "{{ .Values.images.postgresql }}"
