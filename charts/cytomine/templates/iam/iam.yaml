@@ -38,6 +38,11 @@ spec:
             secretKeyRef:
               name: postgres-iam-secret
               key: password
+        - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-iam-secret
+              key: password
         volumeMounts:
         - name: keystore
           mountPath: "/opt/keycloak/conf/server.keystore"

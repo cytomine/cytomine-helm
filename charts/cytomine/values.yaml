@@ -54,7 +54,7 @@ images:
   nginx: cytomine/nginx:latest
   web_ui: cytomine/web-ui:latest
   cbir: cytomine/cbir:latest
-  iam: cytomine/iam:latest
+  iam: keycloak/keycloak:26.3
   pullPolicy: Always
 
 #
