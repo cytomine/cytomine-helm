@@ -45,6 +45,11 @@ spec:
             secretKeyRef:
               name: admin-iam-secret
               key: password
+        - name: KC_KEYSTORE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: admin-iam-secret
+              key: password
         volumeMounts:
         - name: keystore
           mountPath: "/opt/keycloak/conf/server.keystore"
