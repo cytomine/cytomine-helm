@@ -64,8 +64,6 @@ spec:
             - name: temp
               mountPath: /tmp
             - name: temp
-              mountPath: /app
-            - name: temp
               mountPath: "/var/cache/nginx/client_temp"
             - name: temp
               mountPath: "/var/cache/nginx/proxy_temp"
