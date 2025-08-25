@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: iam
 data:
+  KC_BOOTSTRAP_ADMIN_USERNAME: admin
   KC_ADMIN: admin
   KC_PROXY_HEADERS: xforwarded
   KC_HTTP_RELATIVE_PATH: /iam
