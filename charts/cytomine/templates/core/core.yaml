@@ -22,6 +22,8 @@ spec:
         role: core
         app: {{ template "cytomine.name" . }}-core
         release: {{ .Release.Name }}
+      annotations:
+        checksum/config: "{{ include (print $.Template.BasePath "/core/core-config.yaml") . | sha256sum }}"
     spec:
       securityContext:
         runAsUser: {{ .Values.containerSecurity.userID }}
