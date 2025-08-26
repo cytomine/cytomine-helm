@@ -183,6 +183,7 @@ data:
   URL_CORE: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
   URL_PIMS1: http://{{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
   INTERNAL_PROXY_URL: "{{ include "core.url" . }}"
+  SERVER_URL: "{{ include "core.url" . }}"
 {{ end }}
 ---
 {{ if .Values.core.deploy }}
