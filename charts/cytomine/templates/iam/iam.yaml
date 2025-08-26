@@ -19,6 +19,12 @@ spec:
       volumes:
       - name: keystore
         emptyDir: {}
+      - name: import-config
+        configMap:
+          name: iam-config-json
+          items:
+          - key: "config.json"
+            path: "config.json"
       initContainers:
       - name: certificates-provider
         image: eclipse-temurin:8u462-b08-jdk-ubi9-minimal
@@ -57,10 +63,3 @@ spec:
         - name: import-config
           mountPath: "/opt/keycloak/data/import/config.json"
           subPath: "config.json"
-      volumes:
-      - name: import-config
-        configMap:
-          name: iam-config-json
-          items:
-          - key: "config.json"
-            path: "config.json"
