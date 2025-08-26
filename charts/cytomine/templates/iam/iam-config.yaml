@@ -24,3 +24,12 @@ data:
   # KC_SMTP_USER: smtp.USER
   # KC_SMTP_PASS: smtp.PASS
   # KC_SMTP_FROM: smtp.FROM
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: iam-config-json
+data:
+  config.json: |-
+    {{ (tpl (.Files.Get "configs/iam/config.json.sample") . ) | nindent 4 }}
