@@ -43,6 +43,13 @@ spec:
                 name: iam
                 port:
                   number: {{ .Values.iam.port }}
+          - path: /cbir
+            pathType: Prefix
+            backend:
+              service:
+                name: cbir
+                port:
+                  number: {{ .Values.cbir.port }}
           - path: /
             pathType: Prefix
             backend:
