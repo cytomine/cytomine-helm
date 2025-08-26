@@ -3,8 +3,7 @@ kind: ConfigMap
 metadata:
   name: iam
 data:
-  KC_BOOTSTRAP_ADMIN_USERNAME: admin
-  KC_ADMIN: admin
+  KEYCLOAK_ADMIN: admin
   KC_PROXY_HEADERS: xforwarded
   KC_HTTP_RELATIVE_PATH: /iam
   KC_HTTP_ENABLED: "true"
@@ -18,7 +17,6 @@ data:
   KC_DB_URL_HOST: postgres-iam-0.postgres-iam.{{ .Release.Namespace }}.svc.cluster.local
   KC_DB_URL_PORT: "5432"
   KC_HOSTNAME: "{{ .Values.global.domainName }}"
-  KC_KEYSTORE_PASSWORD: password # to change!
   # KC_HOSTNAME_ADMIN: aaa_config.CYTOMINE_HOST
   # KC_ADMIN_EMAIL: cytomine@uliege.be
   # KC_SMTP_HOST: smtp.HOST

@@ -40,7 +40,12 @@ spec:
             secretKeyRef:
               name: postgres-iam-secret
               key: password
-        - name: KC_ADMIN_PASSWORD
+        - name: KEYCLOAK_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: admin-iam-secret
+              key: password
+        - name: KC_KEYSTORE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: admin-iam-secret
