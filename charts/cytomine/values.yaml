@@ -202,7 +202,7 @@ iam:
   port: 8080
 
 cbir:
-  port: 8080
+  port: 6000 # https://github.com/cytomine/cytomine/blob/8e5a14bf70b22e9f96a253d6402f793e8a37ce3e/cbir/Dockerfile#L37
 
 #
 # Kuberenetes things
