@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: cbir
+      annotations:
+        checksum/config: "{{ include (print $.Template.BasePath "/cbir/cbir-config.yaml") . | sha256sum }}"
     spec:
       containers:
       - name: cbir
