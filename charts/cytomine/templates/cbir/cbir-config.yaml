@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: cbir
 data:
-    ENV_VAL: "TEST"
+    API_BASE_PATH: "/cbir"
