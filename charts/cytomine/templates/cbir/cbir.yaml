@@ -24,3 +24,9 @@ spec:
         envFrom:
           - configMapRef:
               name: cbir
+        volumeMounts:
+          - name: data
+            mountPath: /data/
+      volumes:
+      - name: data
+        emptyDir: {}

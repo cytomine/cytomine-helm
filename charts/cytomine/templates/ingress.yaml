@@ -57,80 +57,22 @@ spec:
                 name: {{ include "cytomine.name" . }}-web-ui
                 port:
                   number: {{ .Values.web_ui.port }}
+          - path: /upload
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "cytomine.name" . }}-pims
+                port:
+                  number: {{ .Values.pims.port }}
+          - path: /pims
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "cytomine.name" . }}-pims
+                port:
+                  number: {{ .Values.pims.port }}
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
     secretName: {{ include "cytomine.name" . }}-ingress-tls-1
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: {{ .Release.Namespace }}
-  name: upload
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 20Gi
-    nginx.ingress.kubernetes.io/enable-access-log: "true"
-    nginx.ingress.kubernetes.io/enable-error-log: "true"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
-    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full
-    nginx.org/proxy-connect-timeout: 3600s
-    nginx.org/proxy-read-timeout: 3600s
-    nginx.org/proxy-send-timeout: 3600s
-    cert-manager.io/issuer: letsencrypt
-spec:
-  ingressClassName: public
-  rules:
-    - host: {{ include "upload.hostname" . }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "cytomine.name" . }}-pims
-                port:
-                  number: {{ .Values.pims.port }}
 
-  tls:
-  - hosts:
-    - {{ include "upload.hostname" . }}
-    secretName: {{ include "cytomine.name" . }}-ingress-tls-2
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: {{ .Release.Namespace }}
-  name: pims
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 20Gi
-    nginx.ingress.kubernetes.io/enable-access-log: "true"
-    nginx.ingress.kubernetes.io/enable-error-log: "true"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
-    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full
-    nginx.org/proxy-connect-timeout: 3600s
-    nginx.org/proxy-read-timeout: 3600s
-    nginx.org/proxy-send-timeout: 3600s
-    cert-manager.io/issuer: letsencrypt
-spec:
-  ingressClassName: public
-  rules:
-    - host: {{ include "pims.hostname" . }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "cytomine.name" . }}-pims
-                port:
-                  number: {{ .Values.pims.port }}
-  tls:
-  - hosts:
-    - {{ include "pims.hostname" . }}
-    secretName: {{ include "cytomine.name" . }}-ingress-tls-3
