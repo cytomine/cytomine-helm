@@ -80,10 +80,6 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.web_ui.port }}
-          securityContext:
-            allowPrivilegeEscalation: {{ .Values.containerSecurity.allowPrivilegeEscalation }}
-            privileged: {{ .Values.containerSecurity.privileged }}
-            readOnlyRootFilesystem: {{ .Values.containerSecurity.readOnlyRootFilesystem }}
           resources:
             {{- toYaml .Values.web_ui.resources | nindent 12 }}
       {{- with .Values.global.tolerations }}
