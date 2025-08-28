@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cytomine.name" . }}-redis
+  annotations:
+    kube-score/ignore: pod-probes
+  labels:
+    role: {{ include "cytomine.name" . }}-redis
+    app: {{ include "cytomine.name" . }}
+    component: {{ .Release.Name }}-redis
+    release: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "cytomine.name" . }}-redis
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        role: redis
+        app: {{ template "cytomine.name" . }}-redis
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-redis
+          image: "{{ .Values.images.redis }}"
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.redis.port }}
