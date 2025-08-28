@@ -80,4 +80,3 @@ spec:
   - hosts:
     - {{ include "core.hostname" . }}
     secretName: {{ include "cytomine.name" . }}-ingress-tls-1
-
