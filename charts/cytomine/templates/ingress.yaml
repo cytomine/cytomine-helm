@@ -9,7 +9,7 @@ metadata:
     # not sure, though
     nginx.ingress.kubernetes.io/proxy-body-size: 20Gi
     nginx.org/client-max-body-size: 20Gi
-    #
+
     nginx.ingress.kubernetes.io/enable-access-log: "true"
     nginx.ingress.kubernetes.io/enable-error-log: "true"
     nginx.ingress.kubernetes.io/enable-cors: "true"
@@ -69,7 +69,7 @@ spec:
                 name: {{ include "cytomine.name" . }}-pims
                 port:
                   number: {{ .Values.pims.port }}
-          - path: /pims
+          - path: /ims
             pathType: Prefix
             backend:
               service:

@@ -163,7 +163,7 @@ data:
   ADMIN_EMAIL: info@cytomine.coop
   INSTANCE_HOST_PHONE_NUMBER: None
   INSTANCE_HOST_SUPPORT_MAIL: None
-  REVERSE_PROXY_URL: "{{ include "cytomine.name" . }}-nginx:{{ .Values.nginx.port }}"
+  REVERSE_PROXY_URL: "{{ include "core.url" . }}"
   SERVER_ID: {{ .Values.core.server_id }}
   INSTANCE_HOST_WEBSITE_URL: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
   JAVAMELODY_PATH: /javamelody-core
@@ -181,7 +181,6 @@ data:
   SMTP_USER: user
   STORAGE_PATH: /data/images
   URL_CORE: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
-  URL_PIMS1: http://{{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
   INTERNAL_PROXY_URL: "{{ include "core.url" . }}"
   SERVER_URL: "{{ include "core.url" . }}"
 {{ end }}
