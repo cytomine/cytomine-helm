@@ -55,20 +55,6 @@ spec:
                 name: cbir
                 port:
                   number: {{ .Values.cbir.port }}
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "cytomine.name" . }}-web-ui
-                port:
-                  number: {{ .Values.web_ui.port }}
-          - path: /upload
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "cytomine.name" . }}-pims
-                port:
-                  number: {{ .Values.pims.port }}
           - path: /ims
             pathType: Prefix
             backend:
@@ -76,6 +62,14 @@ spec:
                 name: {{ include "cytomine.name" . }}-pims
                 port:
                   number: {{ .Values.pims.port }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "cytomine.name" . }}-web-ui
+                port:
+                  number: {{ .Values.web_ui.port }}
+
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
