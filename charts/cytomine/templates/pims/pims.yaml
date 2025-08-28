@@ -24,6 +24,8 @@ spec:
         role: pims
         app: {{ template "cytomine.name" . }}-pims
         release: {{ .Release.Name }}
+      annotations:
+        checksum/config: "{{ include (print $.Template.BasePath "/pims/pims-config.yaml") . | sha256sum }}"
     spec:
       securityContext:
         runAsUser: {{ .Values.containerSecurity.userID }}
