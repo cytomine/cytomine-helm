@@ -4,3 +4,4 @@ metadata:
   name: cbir
 data:
   API_BASE_PATH: "/cbir"
+  HOST: "redis://{{ include "cytomine.name" . }}-pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}"
