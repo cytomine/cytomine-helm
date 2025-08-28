@@ -58,8 +58,8 @@ spec:
               mountPath: /etc/localtime
               subPath: Europe
             - name: {{ include "cytomine.name" . }}-web-ui-config
-              mountPath: /cm_configs/app/configuration.json.sample
-              subPath: configuration.json.sample
+              mountPath: /app/ui/public/configuration.json
+              subPath: configuration.json
             - name: {{ include "cytomine.name" . }}-web-ui-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
