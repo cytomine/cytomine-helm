@@ -57,6 +57,7 @@ images:
   postgresql_iam: postgres:14
   mongodb: cytomine/mongo:latest
   pims_cache: redis:7
+  redis: redis:7
   core: cytomine/core:latest
   pims: cytomine/pims:latest
   nginx: cytomine/nginx:latest
@@ -122,6 +123,9 @@ pims_cache:
       memory: "256Mi"
       cpu: "200m"
       ephemeral-storage: 1Gi
+
+redis:
+  port: 6379
 
 # Core - Main Cytomine Server
 core:
