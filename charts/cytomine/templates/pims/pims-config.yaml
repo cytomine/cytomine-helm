@@ -21,6 +21,7 @@ data:
     cache_url: redis://{{ include "cytomine.name" . }}-pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}
     ROOT: /data/images
     INTERNAL_URL_CORE: http://{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}
+    DEBUG: 'true'
 {{ end }}
 ---
 {{ if .Values.pims.deploy }}
