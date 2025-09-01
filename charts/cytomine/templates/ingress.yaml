@@ -7,8 +7,8 @@ metadata:
     # https://stackoverflow.com/a/73548785
     # It seems that we are using k8s official nginx image.
     # not sure, though
-    nginx.ingress.kubernetes.io/proxy-body-size: 20G
-    nginx.org/client-max-body-size: 20G
+    nginx.ingress.kubernetes.io/proxy-body-size: "20G"
+    nginx.org/client-max-body-size: "20G"
 
     nginx.ingress.kubernetes.io/enable-access-log: "true"
     nginx.ingress.kubernetes.io/enable-error-log: "true"
