@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-config-2
+  name: {{ include "cytomine.name" . }}-pims-config
 data:
     API_BASE_PATH: "/ims"
     DEFAULT_ANNOTATION_ORIGIN: LEFT_TOP
