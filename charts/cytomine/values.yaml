@@ -172,6 +172,11 @@ pims:
     storageClassName: null
   tempImageStorage:
     storageClassName: null
+  # set a folder on the nodepath to import data from.
+  datasetImportFolder: null
+  # whether to tolerate the absence of the folder or not
+  datasetImportFolderFailIfAbsent: true
+
 # Nginx - Main HTTP proxy dispatching incoming requests
 nginx:
   deploy: false
