@@ -41,11 +41,11 @@ spec:
             name: {{ template "cytomine.name" . }}-pims-logging
         - name: temp
           emptyDir: {}
-        {{- if .Values.datasetImportFolder }}
+        {{- if .Values.pims.datasetImportFolder }}
         - name: import-folder
           hostPath:
-            path: {{ .Values.datasetImportFolder }} # directory location on host
-            type: {{ .Values.datasetImportFolderFailIfAbsent | ternary "Directory" "DirectoryOrCreate" | quote  }} # this field is optional
+            path: {{ .Values.pims.datasetImportFolder }} # directory location on host
+            type: {{ .Values.pims.datasetImportFolderFailIfAbsent | ternary "Directory" "DirectoryOrCreate" | quote  }} # this field is optional
         {{- end }}
       containers:
         - name: {{ .Chart.Name }}-pims
@@ -74,9 +74,9 @@ spec:
                 secretKeyRef:
                   name: {{ include "cytomine.name" . }}-pims-secret
                   key: private_key
-            {{- if .Values.datasetImportFolder }}
+            {{- if .Values.pims.datasetImportFolder }}
             - name: DATASET_PATH
-              value: {{.Values.datasetImportFolder }}
+              value: {{.Values.pims.datasetImportFolder }}
             {{- end }}
           volumeMounts:
             - name: images
@@ -92,7 +92,7 @@ spec:
               mountPath: /tmp
             - name: temp
               mountPath: /app
-            {{- if .Values.datasetImportFolder }}
+            {{- if .Values.pims.datasetImportFolder }}
             - mountPath: "/data/import"
               name: import-folder
               readOnly: true

@@ -8,6 +8,7 @@ pims:
     storageClassName: 'any'
   tempImageStorage:
     storageClassName: 'any'
+  datasetImportFolder: '/data/dataset'
 mongodb:
   storageClassName: 'any'
 
