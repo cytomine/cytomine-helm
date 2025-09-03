@@ -1,0 +1,103 @@
+#{{- if .Values.pims.datasetImportFolder }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pims-import
+  namespace: cytomine-production
+  labels:
+    app: pims-import
+spec:
+  template:
+    spec:
+      containers:
+      # putting multiple containers for psql commands for the sake of clarity
+      - name: private-key-fetcher
+        image: postgres:14
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/private_key -c \"SELECT private_key from sec_user where id in (SELECT sec_user_id from sec_user_sec_role where sec_role_id in (SELECT id from sec_role where authority = 'ROLE_SUPER_ADMIN') limit 1)\""]
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: postgres-core-secret
+                key: password
+        - name: POSTGIS_HOST
+          value: cytomine-postgis-0.cytomine-postgis.cytomine-production.svc.cluster.local
+        - name: POSTGIS_PORT
+          value: "5432"
+        - name: POSTGIS_USER
+          value: "docker"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      - name: public-key-fetcher
+        image: postgres:14
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/public_key -c \"SELECT public_key from sec_user where id in (SELECT sec_user_id from sec_user_sec_role where sec_role_id in (SELECT id from sec_role where authority = 'ROLE_SUPER_ADMIN') limit 1)\""]
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: postgres-core-secret
+                key: password
+        - name: POSTGIS_HOST
+          value: cytomine-postgis-0.cytomine-postgis.cytomine-production.svc.cluster.local
+        - name: POSTGIS_PORT
+          value: "5432"
+        - name: POSTGIS_USER
+          value: "docker"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      - name: storage-id-fetcher
+        image: postgres:14
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/storage_id -c \"SELECT id from storage where user_id in (SELECT sec_user_id from sec_user_sec_role where sec_role_id in (SELECT id from sec_role where authority = 'ROLE_SUPER_ADMIN') limit 1)\""]
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: postgres-core-secret
+                key: password
+        - name: POSTGIS_HOST
+          value: cytomine-postgis-0.cytomine-postgis.cytomine-production.svc.cluster.local
+        - name: POSTGIS_PORT
+          value: "5432"
+        - name: POSTGIS_USER
+          value: "docker"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      - name: keys-display
+        image: ubuntu:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: [ "cat /data/*"]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      - name: generate-signature
+        image: ubuntu:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: [ ""]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      - name: import-call
+        image: curlimages/curl:8.15.0
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: [ "curl -i -X POST http://cytomine-core.cytomine-production.svc.cluster.local:8080/api/import?storage_id=$(cat /data/storage_id) -H 'Content-Type: application/json'"]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - emptyDir: {}
+        name: data
+      restartPolicy: Never
+  backoffLimit: 4
+#{{- end }}
