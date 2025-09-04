@@ -17,7 +17,7 @@ data:
     task_queue_enabled: "False"
     TASK_QUEUE_ENABLED: "False"
     PENDING_PATH: /tmp/uploaded
-    PIMS_URL: {{ include "cytomine.name" . }}-pims-0.{{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
+    PIMS_URL: {{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
     cache_url: redis://{{ include "cytomine.name" . }}-pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}
     ROOT: /data/images
     # INTERNAL_URL_CORE: http://{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}

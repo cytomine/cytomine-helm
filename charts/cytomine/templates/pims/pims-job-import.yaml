@@ -75,23 +75,30 @@ spec:
         image: ubuntu:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
-        args: [ "cat /data/*"]
+        args: [ "echo TEST: $(cat /data/public_key)"]
+        env:
+        - name: PUBLIC_KEY
+          value: private_key
         volumeMounts:
         - name: data
           mountPath: /data
-      - name: generate-signature
-        image: ubuntu:latest
-        imagePullPolicy: IfNotPresent
-        command: ["/bin/sh", "-c"]
-        args: [ ""]
-        volumeMounts:
         - name: data
-          mountPath: /data
+          mountPath: /data/private_key
+          subPath: private_key
+      # - name: generate-signature
+      #   image: ubuntu:latest
+      #   imagePullPolicy: IfNotPresent
+      #   command: ["/bin/sh", "-c"]
+      #   args: [ "--host", "http://cytomine-core.cytomine-production.svc.cluster.local:8080/api/import", "--public_key", "$(cat /data/public_key)" , "--private_key", "$(cat /data/private_key)"]
+      #   volumeMounts:
+      #   - name: data
+      #     mountPath: /data
       - name: import-call
-        image: curlimages/curl:8.15.0
-        imagePullPolicy: IfNotPresent
+        image: cytomine/python-client:latest
+        imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
-        args: [ "curl -i -X POST http://cytomine-core.cytomine-production.svc.cluster.local:8080/api/import?storage_id=$(cat /data/storage_id) -H 'Content-Type: application/json'"]
+        # args: [ "python examples/import_datasets.py --host=http://cytomine-pims.cytomine-production.svc.cluster.local:5000 --public_key=$$(cat /data/public_key) --private_key=$$(cat /data/private_key) --import-uri=import"]
+        args: [ "python examples/import_datasets.py --host=https://production.cytomine.org --public_key=$$(cat /data/public_key) --private_key=$$(cat /data/private_key) --import-uri=import"]
         volumeMounts:
         - name: data
           mountPath: /data
