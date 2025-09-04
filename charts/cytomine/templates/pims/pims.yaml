@@ -93,7 +93,7 @@ spec:
             - name: temp
               mountPath: /app
             {{- if .Values.pims.datasetImportFolder }}
-            - mountPath: "/data/import"
+            - mountPath: "/data/dataset"
               name: import-folder
               readOnly: true
             {{- end }}
