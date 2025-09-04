@@ -15,7 +15,7 @@ spec:
         image: postgres:14
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
-        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/private_key -c \"SELECT private_key from sec_user where id in (SELECT sec_user_id from sec_user_sec_role where sec_role_id in (SELECT id from sec_role where authority = 'ROLE_SUPER_ADMIN') limit 1)\""]
+        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/private_key -c \"SELECT private_key from sec_user where username = 'admin'\""]
         env:
         - name: PGPASSWORD
           valueFrom:
@@ -35,7 +35,7 @@ spec:
         image: postgres:14
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
-        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/public_key -c \"SELECT public_key from sec_user where id in (SELECT sec_user_id from sec_user_sec_role where sec_role_id in (SELECT id from sec_role where authority = 'ROLE_SUPER_ADMIN') limit 1)\""]
+        args: ["psql --no-align --quiet --tuples-only -U $(POSTGIS_USER) -h $(POSTGIS_HOST) -o /data/public_key -c \"SELECT public_key from sec_user where username = 'admin'\""]
         env:
         - name: PGPASSWORD
           valueFrom:
