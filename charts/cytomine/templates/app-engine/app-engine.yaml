@@ -30,3 +30,12 @@ spec:
             secretKeyRef:
               name: postgres-app-engine-secret
               key: password
+        - name: SCHEDULER_MASTER_URL
+          value: "https://kubernetes.default.svc" # https://kubernetes.default.svc ?
+        - name: SCHEDULER_OAUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: app-engine-sa
+              key: token
+      serviceAccountName: app-engine
+      automountServiceAccountToken: true
