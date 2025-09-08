@@ -22,17 +22,11 @@ spec:
         ports:
         - containerPort: {{ .Values.app_engine.port }}
         envFrom:
-          - configMapRef:
-              name: app-engine
+        - configMapRef:
+            name: app-engine
         env:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: postgres-app-engine-secret
               key: password
-        volumeMounts:
-          - name: data
-            mountPath: /data/
-      volumes:
-      - name: data
-        emptyDir: {}

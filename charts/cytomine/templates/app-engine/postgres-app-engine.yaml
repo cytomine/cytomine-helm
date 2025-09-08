@@ -45,9 +45,9 @@ spec:
               mountPath: /tmp
           env:
           - name: POSTGRES_USER
-            value: app-engine
+            value: appengine
           - name: POSTGRES_DB
-            value: app-engine
+            value: appengine
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
