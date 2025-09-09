@@ -34,7 +34,7 @@ spec:
                 name: {{ include "cytomine.name" . }}-core
                 port:
                   number: {{ .Values.core.port }}
-          - path: /api/app-engine
+          - path: /app-engine
             pathType: Prefix
             backend:
               service:
