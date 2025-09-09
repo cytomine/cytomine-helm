@@ -17,7 +17,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole # we need to restrict that by namespace (Role not ClusterRole)
 metadata:
-  name: pod-starter
+  name: pod-starter-for-{{ .Release.Namespace }}
 rules:
 - apiGroups: [""] # "" indicates the core API group
   resources: ["pods"]
@@ -27,7 +27,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: pod-starter-app-engine
+  name: pod-starter-app-engine-{{ .Release.Namespace }}
 
 subjects:
 - kind: ServiceAccount
@@ -36,5 +36,5 @@ subjects:
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole #this must be Role or ClusterRole
-  name: pod-starter # this must match the name of the Role or ClusterRole you wish to bind to
+  name: pod-starter-for-{{ .Release.Namespace }} # this must match the name of the Role or ClusterRole you wish to bind to
   apiGroup: ""
