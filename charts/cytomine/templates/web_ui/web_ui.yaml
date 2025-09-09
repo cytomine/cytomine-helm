@@ -63,22 +63,22 @@ spec:
             - name: {{ include "cytomine.name" . }}-web-ui-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
-            # - name: temp
-            #   mountPath: /tmp
-            # - name: temp
-            #   mountPath: "/var/cache/nginx/client_temp"
-            # - name: temp
-            #   mountPath: "/var/cache/nginx/proxy_temp"
-            # - name: temp
-            #   mountPath: "/var/cache/nginx/fastcgi_temp"
-            # - name: temp
-            #   mountPath: "/var/cache/nginx/uwsgi_temp"
-            # - name: temp
-            #   mountPath: "/var/cache/nginx/scgi_temp"
-            # - name: temp
-            #   mountPath: "/var/run"
-            # - name: temp
-            #   mountPath: /etc/nginx/proxy_temp
+            - name: temp
+              mountPath: /tmp
+            - name: temp
+              mountPath: "/var/cache/nginx/client_temp"
+            - name: temp
+              mountPath: "/var/cache/nginx/proxy_temp"
+            - name: temp
+              mountPath: "/var/cache/nginx/fastcgi_temp"
+            - name: temp
+              mountPath: "/var/cache/nginx/uwsgi_temp"
+            - name: temp
+              mountPath: "/var/cache/nginx/scgi_temp"
+            - name: temp
+              mountPath: "/var/run"
+            - name: temp
+              mountPath: /etc/nginx/proxy_temp
           ports:
             - name: http
               containerPort: {{ .Values.web_ui.port }}
