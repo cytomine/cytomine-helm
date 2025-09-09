@@ -3,11 +3,12 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: pims-import
-  namespace: cytomine-production
   labels:
     app: pims-import
 spec:
   schedule: "@hourly"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:

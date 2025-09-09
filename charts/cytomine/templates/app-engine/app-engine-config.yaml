@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-engine
+data:
+  DB_USERNAME: appengine
+  DB_NAME: appengine
+  DB_HOST: postgres-app-engine-0.postgres-app-engine.{{ .Release.Namespace }}.svc.cluster.local
+  DB_PORT: "5432"
