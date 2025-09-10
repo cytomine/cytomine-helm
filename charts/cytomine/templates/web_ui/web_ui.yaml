@@ -25,9 +25,9 @@ spec:
       annotations:
         checksum/config: "{{ include (print $.Template.BasePath "/web_ui/web_ui-config.yaml") . | sha256sum }}"
     spec:
-      securityContext:
-        runAsUser: {{ .Values.containerSecurity.userID }}
-        fsGroup: {{ .Values.containerSecurity.fsgroupID }}
+      # securityContext:
+      #   runAsUser: {{ .Values.containerSecurity.userID }}
+      #   fsGroup: {{ .Values.containerSecurity.fsgroupID }}
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
       {{- with .Values.global.affinity }}
       affinity:
@@ -40,8 +40,6 @@ spec:
       - name: {{ include "cytomine.name" . }}-web-ui-localtime
         configMap:
           name: {{ include "cytomine.name" . }}-localtime
-      - name: temp
-        emptyDir: {}
       containers:
         - name: {{ .Chart.Name }}-web-ui
           image: "{{ .Values.images.web_ui }}"
@@ -51,6 +49,8 @@ spec:
             value: {{ include "core.url" . }}
           - name: CYTOMINE_COMMERCIAL_VERSION
             value: {{ .Values.web_ui.commercial_version }}
+          - name: APPENGINE_ENABLED
+            value: "true"
           volumeMounts:
             - name: {{ include "cytomine.name" . }}-web-ui-localtime
               mountPath: /etc/localtime
@@ -61,22 +61,6 @@ spec:
             - name: {{ include "cytomine.name" . }}-web-ui-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
-            - name: temp
-              mountPath: /tmp
-            - name: temp
-              mountPath: "/var/cache/nginx/client_temp"
-            - name: temp
-              mountPath: "/var/cache/nginx/proxy_temp"
-            - name: temp
-              mountPath: "/var/cache/nginx/fastcgi_temp"
-            - name: temp
-              mountPath: "/var/cache/nginx/uwsgi_temp"
-            - name: temp
-              mountPath: "/var/cache/nginx/scgi_temp"
-            - name: temp
-              mountPath: "/var/run"
-            - name: temp
-              mountPath: /etc/nginx/proxy_temp
           ports:
             - name: http
               containerPort: {{ .Values.web_ui.port }}
