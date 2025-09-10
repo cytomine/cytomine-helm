@@ -15,7 +15,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
+    nginx.ingress.kubernetes.io/cors-allow-origin: {{ include "core.url" . }}
     nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full,content-MD5
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
@@ -62,6 +62,13 @@ spec:
                 name: {{ include "cytomine.name" . }}-pims
                 port:
                   number: {{ .Values.pims.port }}
+          - path: /app-engine
+            pathType: Prefix
+            backend:
+              service:
+                name: app-engine
+                port:
+                  number: {{ .Values.app_engine.port }}
           - path: /
             pathType: Prefix
             backend:
