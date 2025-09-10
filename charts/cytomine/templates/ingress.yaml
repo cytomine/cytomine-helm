@@ -20,6 +20,10 @@ metadata:
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      chunked_transfer_encoding off;
+    nginx.org/server-snippets: |
+      chunked_transfer_encoding off;
     cert-manager.io/issuer: letsencrypt
 spec:
   ingressClassName: public
@@ -38,9 +42,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-core
+                name: app-engine
                 port:
-                  number: {{ .Values.core.port }}
+                  number: {{ .Values.app_engine.port }}
           - path: /api
             pathType: Prefix
             backend:
