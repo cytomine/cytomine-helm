@@ -184,7 +184,7 @@ data:
   INTERNAL_PROXY_URL: "{{ include "core.url" . }}"
   SERVER_URL: "{{ include "core.url" . }}"
   APPENGINE_ENABLED: "true"
-  APPENGINE_API_URL: http://app-engine.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.app_engine.port }}
+  APPENGINE_API_URL: http://app-engine.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.app_engine.port }}/
 {{ end }}
 ---
 {{ if .Values.core.deploy }}
