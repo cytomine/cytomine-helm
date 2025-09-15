@@ -219,7 +219,6 @@ app_engine:
   port: 8080
   registry_url:
   registry_port:
-  registry_secret_name:
 
 #
 # Kubernetes things

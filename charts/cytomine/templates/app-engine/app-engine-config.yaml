@@ -9,4 +9,5 @@ data:
   DB_PORT: "5432"
   API_PREFIX: /app-engine/
   REGISTRY_URL: {{ .Values.app_engine.registry_url }}
+  REGISTRY_HOST: {{ .Values.app_engine.registry_url }}
   REGISTRY_PORT: "{{ .Values.app_engine.registry_port }}"
