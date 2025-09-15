@@ -217,6 +217,8 @@ cbir:
 
 app_engine:
   port: 8080
+  registry_url:
+  registry_port:
 
 #
 # Kubernetes things
