@@ -1,24 +1,3 @@
-{{/* PIMS hostname */}}
-{{- define "pims.hostname" -}}
-{{- .Values.global.imsDomainName | default (printf "ims.%s" .Values.global.domainName )    }}
-{{- end }}
-
-
-{{/* PIMS url */}}
-{{- define "pims.url" -}}
-{{- printf "https://%s" (include "pims.hostname" .) }}
-{{- end }}
-
-{{/* URL Upload hostname */}}
-{{- define "upload.hostname" -}}
-{{- .Values.global.urlUpload | default (printf "upload.%s" .Values.global.domainName )    }}
-{{- end }}
-
-{{/* URL Upload url */}}
-{{- define "upload.url" -}}
-{{- printf "https://%s" (include "upload.hostname" .) }}
-{{- end }}
-
 {{/* Core hostname */}}
 {{- define "core.hostname" -}}
 {{- .Values.global.urlCore | default (printf "%s" .Values.global.domainName )    }}

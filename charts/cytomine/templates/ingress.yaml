@@ -15,11 +15,15 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
+    nginx.ingress.kubernetes.io/cors-allow-origin: {{ include "core.url" . }}
     nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full,content-MD5
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      chunked_transfer_encoding off;
+    nginx.org/server-snippets: |
+      chunked_transfer_encoding off;
     cert-manager.io/issuer: letsencrypt
 spec:
   ingressClassName: public
@@ -28,13 +32,6 @@ spec:
       http:
         paths:
           - path: /server
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "cytomine.name" . }}-core
-                port:
-                  number: {{ .Values.core.port }}
-          - path: /app-engine
             pathType: Prefix
             backend:
               service:
