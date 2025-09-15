@@ -38,13 +38,6 @@ spec:
                 name: {{ include "cytomine.name" . }}-core
                 port:
                   number: {{ .Values.core.port }}
-          - path: /app-engine
-            pathType: Prefix
-            backend:
-              service:
-                name: app-engine
-                port:
-                  number: {{ .Values.app_engine.port }}
           - path: /api
             pathType: Prefix
             backend:
@@ -73,13 +66,6 @@ spec:
                 name: {{ include "cytomine.name" . }}-pims
                 port:
                   number: {{ .Values.pims.port }}
-          - path: /app-engine
-            pathType: Prefix
-            backend:
-              service:
-                name: app-engine
-                port:
-                  number: {{ .Values.app_engine.port }}
           - path: /
             pathType: Prefix
             backend:
