@@ -8,7 +8,9 @@ data:
   DB_HOST: postgres-app-engine-0.postgres-app-engine.{{ .Release.Namespace }}.svc.cluster.local
   DB_PORT: "5432"
   API_PREFIX: /app-engine/
-  REGISTRY_URL: {{ .Values.app_engine.registry_url }}/cytomine
+  REGISTRY_URL: http://registry.{{ .Release.Namespace }}.svc.cluster.local:5000
   SCHEDULER_ADVERTISED_URL: http://app-engine.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.app_engine.port }}
+  SCHEDULER_REGISTRY_ADVERTISED_URL: registry.{{ .Values.global.domainName }}
   SCHEDULER_USE_HOST_NETWORK: "false"
   SCHEDULER_RUN_MODE: "cluster"
+  SCHEDULER_TASKS_NAMESPACE: {{ .Values.app_engine.tasks_namespace }}

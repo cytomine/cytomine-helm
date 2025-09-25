@@ -35,7 +35,7 @@ spec:
         - name: SCHEDULER_OAUTH_TOKEN
           valueFrom:
             secretKeyRef:
-              name: app-engine-sa
+              name: app-engine
               key: token
       serviceAccountName: app-engine
       automountServiceAccountToken: true
