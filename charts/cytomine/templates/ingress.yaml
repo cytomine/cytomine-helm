@@ -73,18 +73,7 @@ spec:
                 name: {{ include "cytomine.name" . }}-web-ui
                 port:
                   number: {{ .Values.web_ui.port }}
-    - host: registry.{{ .Values.global.domainName }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: registry
-                port:
-                  number: 5000
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
-    - registry.{{ .Values.global.domainName }}
     secretName: {{ include "cytomine.name" . }}-ingress-tls-1
