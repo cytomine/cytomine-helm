@@ -76,4 +76,4 @@ spec:
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
-    secretName: {{ include "cytomine.name" . }}-ingress-tls-1
+    secretName: {{ include "cytomine.name" . }}-ingress-tls
