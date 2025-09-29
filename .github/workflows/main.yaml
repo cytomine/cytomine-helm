@@ -32,6 +32,10 @@ jobs:
       - name: Helm package
         run: helm package ./charts/cytomine
 
+      - name: Get version
+        run: |
+          cat ./charts/cytomine/Chart.yaml | grep "version:" | sed -e 's/^version: (.*)$/\1/g'
+
       # - name: Build and push Docker image
       #   id: push
       #   uses: docker/build-push-action@v6
