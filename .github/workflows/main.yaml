@@ -35,10 +35,12 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v4
 
-
       - name: Helm package
         run: helm package ./charts/cytomine
 
+
+      - name: Helm login
+        run: helm registry login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} https://hub.docker.com
 
 
       # - name: Build and push Docker image
