@@ -14,13 +14,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-pims-cache
+      app: pims-cache
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: pims-cache
-        app: {{ template "cytomine.name" . }}-pims-cache
+        app: pims-cache
         release: {{ .Release.Name }}
     spec:
       securityContext:

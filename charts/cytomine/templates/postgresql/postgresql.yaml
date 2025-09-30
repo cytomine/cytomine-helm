@@ -16,13 +16,13 @@ spec:
   serviceName: postgis
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-postgis
+      app: postgis
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: postgresql
-        app: {{ template "cytomine.name" . }}-postgis
+        app: postgis
         release: {{ .Release.Name }}
     spec:
       securityContext:

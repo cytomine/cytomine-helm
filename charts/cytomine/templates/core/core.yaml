@@ -14,13 +14,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-core
+      app: core
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: core
-        app: {{ template "cytomine.name" . }}-core
+        app: core
         release: {{ .Release.Name }}
       annotations:
         checksum/config: "{{ include (print $.Template.BasePath "/core/core-config.yaml") . | sha256sum }}"
@@ -54,9 +54,9 @@ spec:
                   key: password
           envFrom:
             - configMapRef:
-                name: cytomine-core-env
+                name: core-env
             - secretRef:
-                name: cytomine-core-secret
+                name: core-secret
           volumeMounts:
             - name: core-config
               mountPath:  /cm_configs/app/application.yml.sample

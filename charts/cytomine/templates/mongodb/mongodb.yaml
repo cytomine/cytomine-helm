@@ -16,13 +16,13 @@ spec:
   serviceName: mongodb
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-mongodb
+      app: mongodb
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: mongodb
-        app: {{ template "cytomine.name" . }}-mongodb
+        app: mongodb
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}

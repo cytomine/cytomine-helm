@@ -13,13 +13,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-redis
+      app: redis
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: redis
-        app: {{ template "cytomine.name" . }}-redis
+        app: redis
         release: {{ .Release.Name }}
     spec:
       containers:
