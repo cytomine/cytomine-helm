@@ -2,11 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-cache
+  name: pims-cache
   annotations:
     kube-score/ignore: pod-probes
   labels:
-    role: {{ include "cytomine.name" . }}-pims-cache
+    role: pims-cache
     app: {{ include "cytomine.name" . }}
     component: {{ .Release.Name }}-pims-cache
     release: {{ .Release.Name }}

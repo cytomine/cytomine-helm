@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "cytomine.name" . }}-pims
+  name: pims
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
@@ -67,12 +67,12 @@ spec:
             - name: CYTOMINE_PUBLIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "cytomine.name" . }}-pims-secret
+                  name: pims-secret
                   key: public_key
             - name: CYTOMINE_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "cytomine.name" . }}-pims-secret
+                  name: pims-secret
                   key: private_key
             {{- if .Values.pims.datasetImportFolder }}
             - name: DATASET_PATH

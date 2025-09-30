@@ -37,14 +37,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-core
+                name: core
                 port:
                   number: {{ .Values.core.port }}
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-core
+                name: core
                 port:
                   number: {{ .Values.core.port }}
           - path: /iam
@@ -65,17 +65,17 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-pims
+                name: pims
                 port:
                   number: {{ .Values.pims.port }}
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-web-ui
+                name: web-ui
                 port:
                   number: {{ .Values.web_ui.port }}
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
-    secretName: {{ include "cytomine.name" . }}-ingress-tls
+    secretName: ingress-tls

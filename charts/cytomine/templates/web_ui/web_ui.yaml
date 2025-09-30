@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cytomine.name" . }}-web-ui
+  name: web-ui
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
@@ -34,12 +34,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-      - name: {{ include "cytomine.name" . }}-web-ui-config
+      - name: web-ui-config
         configMap:
-          name: {{ include "cytomine.name" . }}-web-ui-config
-      - name: {{ include "cytomine.name" . }}-web-ui-localtime
+          name: web-ui-config
+      - name: web-ui-localtime
         configMap:
-          name: {{ include "cytomine.name" . }}-localtime
+          name: localtime
       containers:
         - name: web-ui
           image: "{{ .Values.images.web_ui }}"
@@ -52,13 +52,13 @@ spec:
           - name: APPENGINE_ENABLED
             value: "true"
           volumeMounts:
-            - name: {{ include "cytomine.name" . }}-web-ui-localtime
+            - name: web-ui-localtime
               mountPath: /etc/localtime
               subPath: Europe
-            - name: {{ include "cytomine.name" . }}-web-ui-config
+            - name: web-ui-config
               mountPath: /app/configuration.json
               subPath: configuration.json
-            - name: {{ include "cytomine.name" . }}-web-ui-config
+            - name: web-ui-config
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
           ports:
