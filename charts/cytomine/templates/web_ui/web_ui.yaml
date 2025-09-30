@@ -41,7 +41,7 @@ spec:
         configMap:
           name: {{ include "cytomine.name" . }}-localtime
       containers:
-        - name: {{ .Chart.Name }}-web-ui
+        - name: web-ui
           image: "{{ .Values.images.web_ui }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           env:

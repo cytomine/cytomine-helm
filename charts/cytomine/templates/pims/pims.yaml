@@ -48,7 +48,7 @@ spec:
             type: {{ .Values.pims.datasetImportFolderFailIfAbsent | ternary "Directory" "DirectoryOrCreate" | quote  }} # this field is optional
         {{- end }}
       containers:
-        - name: {{ .Chart.Name }}-pims
+        - name: pims
           image: "{{ .Values.images.pims }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           envFrom:
@@ -107,7 +107,7 @@ spec:
           resources:
             {{- toYaml .Values.pims.resources | nindent 12 }}
       initContainers:
-        - name: {{ .Chart.Name }}-pims-init
+        - name: pims-init
           image: "{{ .Values.images.pims }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:

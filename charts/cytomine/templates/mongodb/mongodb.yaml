@@ -37,7 +37,7 @@ spec:
         runAsUser: {{ .Values.containerSecurity.userID }}
         fsGroup: {{ .Values.containerSecurity.fsgroupID }}
       containers:
-        - name: {{ .Chart.Name }}-mongodb
+        - name: mongodb
           image: "{{ .Values.images.mongodb }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           volumeMounts:
