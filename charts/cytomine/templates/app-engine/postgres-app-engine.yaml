@@ -6,7 +6,7 @@ metadata:
   annotations:
   labels:
     role: postgres-app-engine
-    app: {{ include "cytomine.name" . }}
+    app: postgres-app-engine
     component: {{ .Release.Name }}-app-engine-postgres
     release: {{ .Release.Name }}
 spec:
