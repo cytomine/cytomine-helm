@@ -23,7 +23,7 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}-redis
+        - name: redis
           image: "{{ .Values.images.redis }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           ports:

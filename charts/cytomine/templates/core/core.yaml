@@ -43,7 +43,7 @@ spec:
       - name: temp
         emptyDir: {}
       containers:
-        - name: {{ .Chart.Name }}-core
+        - name: core
           image: "{{ .Values.images.core }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           env:
@@ -97,7 +97,7 @@ spec:
             failureThreshold: 4
             timeoutSeconds: 5
       initContainers:
-        - name: {{ .Chart.Name }}-core-init
+        - name: core-init
           image: "{{ .Values.images.core }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:

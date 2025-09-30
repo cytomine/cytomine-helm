@@ -36,7 +36,7 @@ spec:
         - name: temp
           emptyDir: {}
       containers:
-        - name: {{ .Chart.Name }}-postgis
+        - name: postgis
           image: "{{ .Values.images.postgresql }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           volumeMounts:
@@ -70,7 +70,7 @@ spec:
             privileged: {{ .Values.containerSecurity.privileged }}
             readOnlyRootFilesystem: {{ .Values.containerSecurity.readOnlyRootFilesystem }}
       initContainers:
-        - name: {{ .Chart.Name }}-postgis-init
+        - name: postgis-init
           image: alpine:3.18
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:
