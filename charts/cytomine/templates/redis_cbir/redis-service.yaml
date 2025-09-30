@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "cytomine.name" . }}-redis
+  name: redis
 spec:
   selector:
-    app: {{ include "cytomine.name" . }}-redis
+    app: redis
   ports:
-    - name: {{ include "cytomine.name" . }}-redis
+    - name: redis
       port: {{ .Values.redis.port }}
       protocol: TCP

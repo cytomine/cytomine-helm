@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-nginx-config
+  name: nginx-config
 data:
   nginx.conf.sample: |-
     {{ (tpl (.Files.Get "configs/nginx.conf.sample") . ) | nindent 4 }}
@@ -14,13 +14,13 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-nginx-global-config
+  name: nginx-global-config
 data:
-    INTERNAL_URLS_CORE: {{ include "cytomine.name" . }}-core:{{ .Values.core.port }}
-    INTERNAL_URLS_IMS: {{ include "cytomine.name" . }}-pims:{{ .Values.pims.port }}
-    INTERNAL_URLS_IMS2: {{ include "cytomine.name" . }}-pims:{{ .Values.pims.port }}
-    INTERNAL_URLS_IMS3: {{ include "cytomine.name" . }}-pims:{{ .Values.pims.port }}
-    INTERNAL_URLS_WEB_UI: {{ include "cytomine.name" . }}-web-ui:{{ .Values.web_ui.port }}
+    INTERNAL_URLS_CORE: core:{{ .Values.core.port }}
+    INTERNAL_URLS_IMS: pims:{{ .Values.pims.port }}
+    INTERNAL_URLS_IMS2: pims:{{ .Values.pims.port }}
+    INTERNAL_URLS_IMS3: pims:{{ .Values.pims.port }}
+    INTERNAL_URLS_WEB_UI: web-ui:{{ .Values.web_ui.port }}
     UPLOAD_PATH: /tmp/uploaded
     URLS_CORE: {{ .Values.global.domainName }}
     URLS_IMAGE_SERVER: {{ include "pims.hostname" .}}

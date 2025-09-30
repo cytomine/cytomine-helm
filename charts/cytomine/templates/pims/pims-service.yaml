@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "cytomine.name" . }}-pims
+  name: pims
 spec:
   clusterIP: None
   selector:
-    app: {{ include "cytomine.name" . }}-pims
+    app: pims
   ports:
     - name: http
       port: {{ .Values.pims.port }}

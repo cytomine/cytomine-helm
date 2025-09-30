@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-config
+  name: pims-config
 data:
     API_BASE_PATH: "/ims"
     DEFAULT_ANNOTATION_ORIGIN: LEFT_TOP
@@ -17,10 +17,10 @@ data:
     task_queue_enabled: "False"
     TASK_QUEUE_ENABLED: "False"
     PENDING_PATH: /tmp/uploaded
-    PIMS_URL: {{ include "cytomine.name" . }}-pims.{{ .Release.Namespace }}.svc.cluster.local
-    cache_url: redis://{{ include "cytomine.name" . }}-pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}
+    PIMS_URL: pims.{{ .Release.Namespace }}.svc.cluster.local
+    cache_url: redis://pims-cache.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.pims_cache.port }}
     ROOT: /data/images
-    # INTERNAL_URL_CORE: http://{{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}
+    # INTERNAL_URL_CORE: http://core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}
     INTERNAL_URL_CORE: {{ include "core.url" . }}
     DEBUG: 'true'
 {{ end }}
@@ -29,7 +29,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-logging
+  name: pims-logging
 data:
   logging.yml: |-
     {{ .Files.Get "configs/logging.yml" | nindent 4 }}
@@ -39,7 +39,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-secret
+  name: pims-secret
 type: Opaque
 stringData:
   public_key: {{ .Values.pims.public_key }}

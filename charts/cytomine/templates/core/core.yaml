@@ -2,12 +2,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cytomine.name" . }}-core
+  name: core
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
     role: core
-    app: {{ include "cytomine.name" . }}-core
+    app: core
     component: {{ .Release.Name }}-core
     release: {{ .Release.Name }}
 spec:
@@ -36,10 +36,10 @@ spec:
       volumes:
       - name: core-config
         secret:
-          secretName: {{ include "cytomine.name" . }}-core-config
-      - name: {{ include "cytomine.name" . }}-core-localtime
+          secretName: core-config
+      - name: core-localtime
         configMap:
-          name: {{ include "cytomine.name" . }}-localtime
+          name: localtime
       - name: temp
         emptyDir: {}
       containers:
@@ -64,7 +64,7 @@ spec:
             - name: core-config
               mountPath:  /cm_configs/app/logback.xml
               subPath: logback.xml
-            - name: {{ include "cytomine.name" . }}-core-localtime
+            - name: core-localtime
               mountPath: /etc/localtime
               subPath: Europe
             - name: temp
