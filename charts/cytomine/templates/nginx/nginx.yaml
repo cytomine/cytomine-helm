@@ -16,13 +16,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-nginx
+      app: nginx
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: nginx
-        app: {{ template "cytomine.name" . }}-nginx
+        app: nginx
         release: {{ .Release.Name }}
     spec:
       securityContext:
