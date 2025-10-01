@@ -61,6 +61,13 @@ spec:
                 name: cbir
                 port:
                   number: {{ .Values.cbir.port }}
+          - path: /sam
+            pathType: Prefix
+            backend:
+              service:
+                name: sam
+                port:
+                  number: {{ .Values.sam.port }}
           - path: /ims/(formats|image/upload|import|upload)
             pathType: Prefix
             backend:
