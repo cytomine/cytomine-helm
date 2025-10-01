@@ -28,9 +28,10 @@ spec:
             -   name: CYTOMINE_PUBLIC_KEY
                 valueFrom:
                     fileKeyRef:
-                    path: public_key
-                    volumeName: config
-                    optional: false
+                        path: public_key
+                        volumeName: config
+                        optional: false
+                        key: CONFIG_VAR
         initContainers:
             - name: private-key-fetcher
               image: postgres:14
@@ -40,16 +41,16 @@ spec:
               env:
                 - name: PGPASSWORD
                   valueFrom:
-                  secretKeyRef:
-                    name: postgres-core-secret
-                    key: password
+                    secretKeyRef:
+                      name: postgres-core-secret
+                      key: password
                 - name: POSTGIS_HOST
                   value: postgis-0.postgis.{{ .Release.Namespace }}.svc.cluster.local
                 - name: POSTGIS_PORT
                   value: "5432"
                 - name: POSTGIS_USER
                   value: "{{ .Values.postgresql.user }}"
-                volumeMounts:
+              volumeMounts:
                 - name: config
                   mountPath: /config
             - name: public-key-fetcher
@@ -60,9 +61,9 @@ spec:
               env:
               - name: PGPASSWORD
                 valueFrom:
-                secretKeyRef:
-                    name: postgres-core-secret
-                    key: password
+                  secretKeyRef:
+                      name: postgres-core-secret
+                      key: password
               - name: POSTGIS_HOST
                 value: postgis-0.postgis.{{ .Release.Namespace }}.svc.cluster.local
               - name: POSTGIS_PORT
@@ -74,4 +75,4 @@ spec:
                 mountPath: /config
         volumes:
             - emptyDir: {}
-            name: config
+              name: config
