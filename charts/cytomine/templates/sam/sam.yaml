@@ -24,14 +24,11 @@ spec:
             envFrom:
             - configMapRef:
                 name: sam
-            env:
-            -   name: CYTOMINE_PUBLIC_KEY
-                valueFrom:
-                    fileKeyRef:
-                        path: public_key
-                        volumeName: config
-                        optional: false
-                        key: CONFIG_VAR
+            volumeMounts:
+            - name: config
+              mountPath: /config
+            command: ["/bin/sh", "-c"]
+            args: [ "CYTOMINE_PUBLIC_KEY=$$(cat /config/public_key) CYTOMINE_PRIVATE_KEY=$$(cat /config/private_key)  fastapi run app/main.py"]
         initContainers:
             - name: private-key-fetcher
               image: postgres:14
