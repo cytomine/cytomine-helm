@@ -227,7 +227,7 @@ app_engine:
   tasks_namespace:
 
 sam:
-  port: 8080
+  port: 8000
 
 #
 # Kubernetes things

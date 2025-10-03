@@ -4,4 +4,4 @@ metadata:
   name: sam
 data:
   API_BASE_PATH: /sam
-  CYTOMINE_HOST: "core.{{ .Release.Namespace }}.svc.cluster.local"
+  CYTOMINE_HOST: "core.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.core.port }}"
