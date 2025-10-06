@@ -4,7 +4,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "cytomine.name" . }}-pims
+  name: pims
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
@@ -16,13 +16,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-pims
+      app: pims
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: pims
-        app: {{ template "cytomine.name" . }}-pims
+        app: pims
         release: {{ .Release.Name }}
       annotations:
         checksum/config: "{{ include (print $.Template.BasePath "/pims/pims-config.yaml") . | sha256sum }}"
@@ -38,7 +38,7 @@ spec:
       volumes:
         - name: pims-logging
           configMap:
-            name: {{ template "cytomine.name" . }}-pims-logging
+            name: pims-logging
         - name: temp
           emptyDir: {}
         {{- if .Values.pims.datasetImportFolder }}
@@ -48,12 +48,12 @@ spec:
             type: {{ .Values.pims.datasetImportFolderFailIfAbsent | ternary "Directory" "DirectoryOrCreate" | quote  }} # this field is optional
         {{- end }}
       containers:
-        - name: {{ .Chart.Name }}-pims
+        - name: pims
           image: "{{ .Values.images.pims }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: cytomine-pims-config
+                name: pims-config
           env:
             - name: POSTGRES_DB
               value: {{ .Values.postgresql.database }}
@@ -67,12 +67,12 @@ spec:
             - name: CYTOMINE_PUBLIC_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "cytomine.name" . }}-pims-secret
+                  name: pims-secret
                   key: public_key
             - name: CYTOMINE_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "cytomine.name" . }}-pims-secret
+                  name: pims-secret
                   key: private_key
             {{- if .Values.pims.datasetImportFolder }}
             - name: DATASET_PATH
@@ -107,7 +107,7 @@ spec:
           resources:
             {{- toYaml .Values.pims.resources | nindent 12 }}
       initContainers:
-        - name: {{ .Chart.Name }}-pims-init
+        - name: pims-init
           image: "{{ .Values.images.pims }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:

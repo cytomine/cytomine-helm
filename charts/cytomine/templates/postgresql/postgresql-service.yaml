@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "cytomine.name" . }}-postgis
+  name: postgis
 spec:
   clusterIP: None
   selector:
-    app: {{ include "cytomine.name" . }}-postgis
+    app: postgis
   ports:
     - name: postgresql
       port: {{ .Values.postgresql.port }}

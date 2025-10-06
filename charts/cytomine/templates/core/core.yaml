@@ -2,25 +2,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cytomine.name" . }}-core
+  name: core
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
     role: core
-    app: {{ include "cytomine.name" . }}-core
+    app: core
     component: {{ .Release.Name }}-core
     release: {{ .Release.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-core
+      app: core
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: core
-        app: {{ template "cytomine.name" . }}-core
+        app: core
         release: {{ .Release.Name }}
       annotations:
         checksum/config: "{{ include (print $.Template.BasePath "/core/core-config.yaml") . | sha256sum }}"
@@ -36,14 +36,14 @@ spec:
       volumes:
       - name: core-config
         secret:
-          secretName: {{ include "cytomine.name" . }}-core-config
-      - name: {{ include "cytomine.name" . }}-core-localtime
+          secretName: core-config
+      - name: core-localtime
         configMap:
-          name: {{ include "cytomine.name" . }}-localtime
+          name: localtime
       - name: temp
         emptyDir: {}
       containers:
-        - name: {{ .Chart.Name }}-core
+        - name: core
           image: "{{ .Values.images.core }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           env:
@@ -54,9 +54,9 @@ spec:
                   key: password
           envFrom:
             - configMapRef:
-                name: cytomine-core-env
+                name: core-env
             - secretRef:
-                name: cytomine-core-secret
+                name: core-secret
           volumeMounts:
             - name: core-config
               mountPath:  /cm_configs/app/application.yml.sample
@@ -64,7 +64,7 @@ spec:
             - name: core-config
               mountPath:  /cm_configs/app/logback.xml
               subPath: logback.xml
-            - name: {{ include "cytomine.name" . }}-core-localtime
+            - name: core-localtime
               mountPath: /etc/localtime
               subPath: Europe
             - name: temp
@@ -97,7 +97,7 @@ spec:
             failureThreshold: 4
             timeoutSeconds: 5
       initContainers:
-        - name: {{ .Chart.Name }}-core-init
+        - name: core-init
           image: "{{ .Values.images.core }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:

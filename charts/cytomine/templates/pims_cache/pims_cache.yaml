@@ -2,11 +2,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cytomine.name" . }}-pims-cache
+  name: pims-cache
   annotations:
     kube-score/ignore: pod-probes
   labels:
-    role: {{ include "cytomine.name" . }}-pims-cache
+    role: pims-cache
     app: {{ include "cytomine.name" . }}
     component: {{ .Release.Name }}-pims-cache
     release: {{ .Release.Name }}
@@ -14,13 +14,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-pims-cache
+      app: pims-cache
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: pims-cache
-        app: {{ template "cytomine.name" . }}-pims-cache
+        app: pims-cache
         release: {{ .Release.Name }}
     spec:
       securityContext:
@@ -33,7 +33,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}-pims-cache
+        - name: pims-cache
           image: "{{ .Values.images.pims_cache }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           ports:

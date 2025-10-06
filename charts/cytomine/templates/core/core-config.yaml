@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ include "cytomine.name" . }}-core-config
+  name: core-config
 stringData:
   application.yml.sample: |-
     spring:
@@ -158,38 +158,41 @@ stringData:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cytomine.name" . }}-core-env
+  name: core-env
 data:
   ADMIN_EMAIL: info@cytomine.coop
   INSTANCE_HOST_PHONE_NUMBER: None
   INSTANCE_HOST_SUPPORT_MAIL: None
   REVERSE_PROXY_URL: "{{ include "core.url" . }}"
   SERVER_ID: {{ .Values.core.server_id }}
-  INSTANCE_HOST_WEBSITE_URL: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
+  INSTANCE_HOST_WEBSITE_URL: core.{{ .Release.Namespace }}.svc.cluster.local
   JAVAMELODY_PATH: /javamelody-core
   JAVAMELODY_USER: admin
   MONGO_DB_NAME: {{ include "cytomine.name" . }}
-  MONGO_HOST: {{ include "cytomine.name" . }}-mongodb
+  MONGO_HOST: mongodb
   MONGO_PORT: "{{ .Values.mongodb.port }}"
   MONGO_USER: {{ .Values.mongodb.username }}
   POSTGIS_DB_NAME: {{ .Values.postgresql.user }}
-  POSTGIS_HOST: {{ include "cytomine.name" . }}-postgis-0.{{ include "cytomine.name" . }}-postgis.{{ .Release.Namespace }}.svc.cluster.local
+  POSTGIS_HOST: postgis-0.postgis.{{ .Release.Namespace }}.svc.cluster.local
   POSTGIS_PORT: "{{ .Values.postgresql.port }}"
   POSTGIS_USER: {{ .Values.postgresql.user }}
   SMTP_HOST: {{ .Values.smtpHost }}
   SMTP_PORT: "{{ .Values.smtpPort }}"
   SMTP_USER: user
   STORAGE_PATH: /data/images
-  URL_CORE: {{ include "cytomine.name" . }}-core.{{ .Release.Namespace }}.svc.cluster.local
+  URL_CORE: core.{{ .Release.Namespace }}.svc.cluster.local
   INTERNAL_PROXY_URL: "{{ include "core.url" . }}"
   SERVER_URL: "{{ include "core.url" . }}"
+  APPENGINE_ENABLED: "true"
+  APPENGINE_API_URL: http://app-engine.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.app_engine.port }}
+  APPENGINE_API_BASE_PATH: /app-engine/v1/
 {{ end }}
 ---
 {{ if .Values.core.deploy }}
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ include "cytomine.name" . }}-core-secret
+  name: core-secret
 type: Opaque
 stringData:
   ADMIN_PASSWORD: {{ .Values.core.admin_password }}

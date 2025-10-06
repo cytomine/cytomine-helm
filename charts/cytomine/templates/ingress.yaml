@@ -4,23 +4,29 @@ metadata:
   namespace: {{ .Release.Namespace }}
   name: core
   annotations:
+    cert-manager.io/issuer: letsencrypt
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      chunked_transfer_encoding off;
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full,content-MD5
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-origin: {{ include "core.url" . }}
+    nginx.ingress.kubernetes.io/enable-access-log: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/enable-error-log: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+
     # https://stackoverflow.com/a/73548785
     # It seems that we are using k8s official nginx image.
     # not sure, though
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.org/client-max-body-size: "0"
 
-    nginx.ingress.kubernetes.io/enable-access-log: "true"
-    nginx.ingress.kubernetes.io/enable-error-log: "true"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "{{ include "pims.url" . }}, {{ include "core.url" . }}, {{ include "upload.url" . }}"
-    nginx.ingress.kubernetes.io/cors-allow-headers: DNT,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,dateFull,content-type-full,content-MD5
     nginx.org/proxy-connect-timeout: 3600s
     nginx.org/proxy-read-timeout: 3600s
     nginx.org/proxy-send-timeout: 3600s
-    cert-manager.io/issuer: letsencrypt
+    nginx.org/server-snippets: |
+      chunked_transfer_encoding off;
 spec:
   ingressClassName: public
   rules:
@@ -31,21 +37,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-core
-                port:
-                  number: {{ .Values.core.port }}
-          - path: /app-engine
-            pathType: Prefix
-            backend:
-              service:
-                name: {{ include "cytomine.name" . }}-core
+                name: core
                 port:
                   number: {{ .Values.core.port }}
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-core
+                name: core
                 port:
                   number: {{ .Values.core.port }}
           - path: /iam
@@ -62,21 +61,28 @@ spec:
                 name: cbir
                 port:
                   number: {{ .Values.cbir.port }}
-          - path: /ims
+          - path: /sam
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-pims
+                name: sam
+                port:
+                  number: {{ .Values.sam.port }}
+          - path: /ims/(formats|image/upload|import|upload)
+            pathType: Prefix
+            backend:
+              service:
+                name: pims
                 port:
                   number: {{ .Values.pims.port }}
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cytomine.name" . }}-web-ui
+                name: web-ui
                 port:
                   number: {{ .Values.web_ui.port }}
   tls:
   - hosts:
     - {{ include "core.hostname" . }}
-    secretName: {{ include "cytomine.name" . }}-ingress-tls-1
+    secretName: ingress-tls

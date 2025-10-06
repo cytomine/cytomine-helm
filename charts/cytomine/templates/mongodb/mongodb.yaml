@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "cytomine.name" . }}-mongodb
+  name: mongodb
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
@@ -13,16 +13,16 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   replicas: 1
-  serviceName: {{ include "cytomine.name" . }}-mongodb
+  serviceName: mongodb
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-mongodb
+      app: mongodb
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: mongodb
-        app: {{ template "cytomine.name" . }}-mongodb
+        app: mongodb
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ include "cytomine.serviceAccountName" . }}
@@ -37,7 +37,7 @@ spec:
         runAsUser: {{ .Values.containerSecurity.userID }}
         fsGroup: {{ .Values.containerSecurity.fsgroupID }}
       containers:
-        - name: {{ .Chart.Name }}-mongodb
+        - name: mongodb
           image: "{{ .Values.images.mongodb }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           volumeMounts:
@@ -55,7 +55,7 @@ spec:
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "cytomine.name" . }}-mongodb-secret
+                  name: mongodb-secret
                   key: password
             - name: MONGO_INIT_DATABASE
               value: {{ .Values.mongodb.database }}

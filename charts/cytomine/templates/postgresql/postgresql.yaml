@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "cytomine.name" . }}-postgis
+  name: postgis
   annotations:
     kube-score/ignore: pod-probes,container-security-context-user-group-id
   labels:
@@ -13,16 +13,16 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   replicas: 1
-  serviceName: {{ include "cytomine.name" . }}-postgis
+  serviceName: postgis
   selector:
     matchLabels:
-      app: {{ template "cytomine.name" . }}-postgis
+      app: postgis
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         role: postgresql
-        app: {{ template "cytomine.name" . }}-postgis
+        app: postgis
         release: {{ .Release.Name }}
     spec:
       securityContext:
@@ -36,7 +36,7 @@ spec:
         - name: temp
           emptyDir: {}
       containers:
-        - name: {{ .Chart.Name }}-postgis
+        - name: postgis
           image: "{{ .Values.images.postgresql }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           volumeMounts:
@@ -70,7 +70,7 @@ spec:
             privileged: {{ .Values.containerSecurity.privileged }}
             readOnlyRootFilesystem: {{ .Values.containerSecurity.readOnlyRootFilesystem }}
       initContainers:
-        - name: {{ .Chart.Name }}-postgis-init
+        - name: postgis-init
           image: alpine:3.18
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:

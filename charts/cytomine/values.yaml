@@ -49,22 +49,27 @@ smtpPort: 587
 ingress:
   annotations: {}
 
-#
-# Images
-#
 images:
+  #
+  # Cytomine Images
+  #
   app_engine: cytomine/app-engine:latest
+  sam: cytomine/sam:latest
+  core: cytomine/core:latest
+  pims: cytomine/pims:latest
+  web_ui: cytomine/web-ui:latest
+  cbir: cytomine/cbir:latest
+
+  #
+  # External Images
+  #
   postgresql: cytomine/postgis:latest
   postgresql_iam: postgres:14
   postgresql_app_engine: postgres:14
   mongodb: cytomine/mongo:latest
   pims_cache: redis:7
   redis: redis:7
-  core: cytomine/core:latest
-  pims: cytomine/pims:latest
   nginx: cytomine/nginx:latest
-  web_ui: cytomine/web-ui:latest
-  cbir: cytomine/cbir:latest
   iam: keycloak/keycloak:26.3
   pullPolicy: Always
 
@@ -217,6 +222,12 @@ cbir:
 
 app_engine:
   port: 8080
+  registry_url:
+  registry_port:
+  tasks_namespace:
+
+sam:
+  port: 8000
 
 #
 # Kubernetes things

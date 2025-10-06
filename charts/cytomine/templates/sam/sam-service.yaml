@@ -1,13 +1,11 @@
-{{ if .Values.core.deploy }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: core
+  name: sam
 spec:
   selector:
-    app: core
+    app: sam
   ports:
     - name: http
-      port: {{ .Values.core.port }}
+      port: {{ .Values.sam.port }}
       protocol: TCP
-{{ end }}
