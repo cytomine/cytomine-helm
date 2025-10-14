@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repo has been deprecated. All the code continues to evolve in https://github.com/cytomine/cytomine
+
 # Cytomine - Helm
 
 This is the new official Helm Chart for cytomine.
